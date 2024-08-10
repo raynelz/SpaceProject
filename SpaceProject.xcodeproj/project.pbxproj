@@ -9,21 +9,26 @@
 /* Begin PBXBuildFile section */
 		EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD352C679C430064134D /* AppDelegate.swift */; };
 		EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD372C679C430064134D /* SceneDelegate.swift */; };
-		EC4EDD3A2C679C430064134D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD392C679C430064134D /* ViewController.swift */; };
-		EC4EDD3D2C679C430064134D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD3C2C679C430064134D /* Base */; };
 		EC4EDD3F2C679C440064134D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD3E2C679C440064134D /* Assets.xcassets */; };
 		EC4EDD422C679C440064134D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD412C679C440064134D /* Base */; };
+		EC4EDD4B2C679CAB0064134D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC4EDD4A2C679CAB0064134D /* SnapKit */; };
+		EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD4E2C679EB80064134D /* UIView+AddSubviews.swift */; };
+		EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD512C679F330064134D /* GenericViewController.swift */; };
+		EC4EDD552C679FC40064134D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD542C679FC40064134D /* MainView.swift */; };
+		EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD5F2C67A3310064134D /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EC4EDD322C679C430064134D /* SpaceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4EDD352C679C430064134D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC4EDD372C679C430064134D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EC4EDD392C679C430064134D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EC4EDD3C2C679C430064134D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC4EDD3E2C679C440064134D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC4EDD412C679C440064134D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC4EDD432C679C440064134D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC4EDD4E2C679EB80064134D /* UIView+AddSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSubviews.swift"; sourceTree = "<group>"; };
+		EC4EDD512C679F330064134D /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
+		EC4EDD542C679FC40064134D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		EC4EDD5F2C67A3310064134D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC4EDD4B2C679CAB0064134D /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +62,89 @@
 		EC4EDD342C679C430064134D /* SpaceProject */ = {
 			isa = PBXGroup;
 			children = (
-				EC4EDD352C679C430064134D /* AppDelegate.swift */,
-				EC4EDD372C679C430064134D /* SceneDelegate.swift */,
-				EC4EDD392C679C430064134D /* ViewController.swift */,
-				EC4EDD3B2C679C430064134D /* Main.storyboard */,
-				EC4EDD3E2C679C440064134D /* Assets.xcassets */,
-				EC4EDD402C679C440064134D /* LaunchScreen.storyboard */,
-				EC4EDD432C679C440064134D /* Info.plist */,
+				EC4EDD4C2C679EA20064134D /* Application */,
+				EC4EDD532C679FB60064134D /* Modules */,
+				EC4EDD5B2C67A1A20064134D /* Utilities */,
+				EC4EDD562C67A11A0064134D /* Resources */,
 			);
 			path = SpaceProject;
+			sourceTree = "<group>";
+		};
+		EC4EDD4C2C679EA20064134D /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD352C679C430064134D /* AppDelegate.swift */,
+				EC4EDD372C679C430064134D /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EC4EDD4D2C679EAC0064134D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD4E2C679EB80064134D /* UIView+AddSubviews.swift */,
+				EC4EDD512C679F330064134D /* GenericViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EC4EDD532C679FB60064134D /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD572C67A15F0064134D /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		EC4EDD562C67A11A0064134D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD432C679C440064134D /* Info.plist */,
+				EC4EDD402C679C440064134D /* LaunchScreen.storyboard */,
+				EC4EDD3E2C679C440064134D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EC4EDD572C67A15F0064134D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD592C67A16F0064134D /* Model */,
+				EC4EDD582C67A16C0064134D /* View */,
+				EC4EDD5A2C67A1740064134D /* Controller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EC4EDD582C67A16C0064134D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD542C679FC40064134D /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EC4EDD592C67A16F0064134D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EC4EDD5A2C67A1740064134D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD5F2C67A3310064134D /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		EC4EDD5B2C67A1A20064134D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EC4EDD4D2C679EAC0064134D /* Extensions */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,12 +157,16 @@
 				EC4EDD2E2C679C430064134D /* Sources */,
 				EC4EDD2F2C679C430064134D /* Frameworks */,
 				EC4EDD302C679C430064134D /* Resources */,
+				EC4EDD5C2C67A2B60064134D /* SwiftLint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SpaceProject;
+			packageProductDependencies = (
+				EC4EDD4A2C679CAB0064134D /* SnapKit */,
+			);
 			productName = SpaceProject;
 			productReference = EC4EDD322C679C430064134D /* SpaceProject.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +195,9 @@
 				Base,
 			);
 			mainGroup = EC4EDD292C679C430064134D;
+			packageReferences = (
+				EC4EDD492C679CAB0064134D /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = EC4EDD332C679C430064134D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,18 +214,42 @@
 			files = (
 				EC4EDD3F2C679C440064134D /* Assets.xcassets in Resources */,
 				EC4EDD422C679C440064134D /* Base in Resources */,
-				EC4EDD3D2C679C430064134D /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EC4EDD5C2C67A2B60064134D /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EC4EDD2E2C679C430064134D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC4EDD3A2C679C430064134D /* ViewController.swift in Sources */,
+				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
+				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
+				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
+				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
 				EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +258,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EC4EDD3B2C679C430064134D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC4EDD3C2C679C430064134D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EC4EDD402C679C440064134D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,13 +396,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X6KB2A8YM9;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SpaceProject/Info.plist;
+				INFOPLIST_FILE = SpaceProject/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SpaceX;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +412,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raynelzMenties.SpaceProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -321,13 +430,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X6KB2A8YM9;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SpaceProject/Info.plist;
+				INFOPLIST_FILE = SpaceProject/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SpaceX;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +446,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raynelzMenties.SpaceProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -363,6 +478,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC4EDD492C679CAB0064134D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC4EDD4A2C679CAB0064134D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC4EDD492C679CAB0064134D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EC4EDD2A2C679C430064134D /* Project object */;
 }
