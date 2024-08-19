@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85670DB92C7328B0006661E6 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DB82C7328B0006661E6 /* Launch.swift */; };
+		85670DBB2C732BEC006661E6 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBA2C732BEC006661E6 /* LaunchView.swift */; };
+		85670DBD2C732BFC006661E6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBC2C732BFC006661E6 /* LaunchViewController.swift */; };
 		EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD352C679C430064134D /* AppDelegate.swift */; };
 		EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD372C679C430064134D /* SceneDelegate.swift */; };
 		EC4EDD3F2C679C440064134D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD3E2C679C440064134D /* Assets.xcassets */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		85670DB82C7328B0006661E6 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Launch.swift; path = SpaceProject/Modules/Main/Model/Launch.swift; sourceTree = SOURCE_ROOT; };
+		85670DBA2C732BEC006661E6 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		85670DBC2C732BFC006661E6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		EC4EDD322C679C430064134D /* SpaceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4EDD352C679C430064134D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC4EDD372C679C430064134D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				EC4EDD542C679FC40064134D /* MainView.swift */,
+				85670DBA2C732BEC006661E6 /* LaunchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -127,6 +134,7 @@
 		EC4EDD592C67A16F0064134D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				85670DB82C7328B0006661E6 /* Launch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				EC4EDD5F2C67A3310064134D /* MainViewController.swift */,
+				85670DBC2C732BFC006661E6 /* LaunchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -247,10 +256,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
+				85670DBB2C732BEC006661E6 /* LaunchView.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
+				85670DB92C7328B0006661E6 /* Launch.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
+				85670DBD2C732BFC006661E6 /* LaunchViewController.swift in Sources */,
 				EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
