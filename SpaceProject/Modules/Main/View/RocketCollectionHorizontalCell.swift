@@ -15,9 +15,9 @@ final class RocketCollectionHorizontalCell: UICollectionViewCell {
     let mainLabel = UILabel()
     let secondaryLabel = UILabel()
     
-    // MARK: - View initializator
+    // MARK: - Initialization
     override init(frame: CGRect) {
-        super.init(frame: frame)
+        super.init(frame: .zero)
         
         embedViews()
         setupAppearance()
