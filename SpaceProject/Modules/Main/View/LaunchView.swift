@@ -2,7 +2,7 @@
 //  LaunchView.swift
 //  SpaceProject
 //
-//  Created by Захар Литвинчук on 19.08.2024.
+//  Created by Станислав Никулин on 19.08.2024.
 //
 
 import UIKit
@@ -11,17 +11,16 @@ import SnapKit
 final class LaunchView: UIView {
     // MARK: - UI Components
 
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .insetGrouped)
+
 
     // MARK: - Initialization
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        embedViews()
+        setupViews()
         setupAppearance()
         setupLayout()
-        setupBehavior()
-        setupData()
     }
 
     @available(*, unavailable)
@@ -33,19 +32,19 @@ final class LaunchView: UIView {
 // MARK: - Private Methods
 
 private extension LaunchView {
-    // MARK: - Embed Views
+    // MARK: - Setup Views
 
-    func embedViews() {
+    func setupViews() {
         addSubview(tableView)
     }
 
     // MARK: - Setup Appearance
 
     func setupAppearance() {
-        backgroundColor = .white
+        backgroundColor = SpaceAppColor.background.darkVariant
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "LaunchCell")
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = SpaceAppColor.background.darkVariant
     }
 
     // MARK: - Setup Layout
@@ -54,15 +53,5 @@ private extension LaunchView {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-
-    // MARK: - Setup Behavior
-
-    func setupBehavior() {
-    }
-
-    // MARK: - Setup Data
-
-    func setupData() {
     }
 }
