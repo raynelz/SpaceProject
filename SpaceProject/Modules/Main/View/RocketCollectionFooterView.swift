@@ -9,10 +9,14 @@ import UIKit
 import SnapKit
 
 final class RocketCollectionFooterView: UICollectionReusableView {
+    static let identifier = "RocketCollectionFooterView"
+    
+    weak var viewController: UIViewController?
+    
     // MARK: - UI Components
     let launchesNavigationButton = UIButton()
     
-    // MARK: - View initializator
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         embedViews()
@@ -30,11 +34,13 @@ final class RocketCollectionFooterView: UICollectionReusableView {
 // MARK: - Private Methods
 private extension RocketCollectionFooterView {
     // MARK: - Embed Views
+    
     func embedViews() {
         addSubviews(launchesNavigationButton)
     }
     
     // MARK: - Setup Appearance
+    
     func setupAppearance() {
         // TODO: Add localization and color switch
         launchesNavigationButton.setTitle("Посмотреть запуски", for: .normal)
@@ -45,6 +51,7 @@ private extension RocketCollectionFooterView {
     }
     
     // MARK: - Setup Layout
+    
     func setupLayout() {
         launchesNavigationButton.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(30)
@@ -53,6 +60,17 @@ private extension RocketCollectionFooterView {
     }
 
     // MARK: - Setup Behavior
+    
     func setupBehavior() {
+        launchesNavigationButton.addTarget(self, action: #selector(navigateToLaunches), for: .touchUpInside)
+    }
+    
+    @objc
+    func navigateToLaunches() {
+        launchesNavigationButton.animateTap()
+        
+        // TODO: Connect launches VC
+        let launchesViewController = UIViewController()
+        viewController?.navigationController?.pushViewController(launchesViewController, animated: true)
     }
 }

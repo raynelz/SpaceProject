@@ -9,11 +9,15 @@ import UIKit
 import SnapKit
 
 final class RocketCollectionHeaderView: UICollectionReusableView {
+    static let identifier = "RocketCollectionHeaderView"
+    
+    weak var viewController: UIViewController?
+    
     // MARK: - UI Components
     let rocketNameLabel = UILabel()
     let settingsButton = UIButton()
     
-    // MARK: - View initializator
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         embedViews()
@@ -75,5 +79,15 @@ private extension RocketCollectionHeaderView {
     // MARK: - Setup Behavior
 
     func setupBehavior() {
+        settingsButton.addTarget(self, action: #selector(navigateToSettings), for: .touchUpInside)
+    }
+    
+    @objc
+    func navigateToSettings() {
+        settingsButton.animateTap()
+        
+        // TODO: Connect settings VC
+        let settingsViewController = UIViewController()
+        viewController?.navigationController?.pushViewController(settingsViewController, animated: true)
     }
 }
