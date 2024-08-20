@@ -20,9 +20,22 @@ final class MainView: UIView {
         case additionalInfo
         case firstStageInfo
         case secondStageInfo
+        
+        var sectionName: String {
+            switch self {
+            case .specificationInfo:
+                return "Технические характеристики"
+            case .additionalInfo:
+                return "Дополнительная информация"
+            case .firstStageInfo:
+                return "Первая ступень"
+            case .secondStageInfo:
+                return "Вторая ступень"
+            }
+        }
     }
 
-    // MARK: - View initializator
+    // MARK: - Initialization
 	override init(frame: CGRect) {
 		super.init(frame: frame)
         
@@ -30,7 +43,6 @@ final class MainView: UIView {
 		setupAppearance()
 		setupLayout()
         setupCollectionViewLayout()
-		setupBehavior()
 		setupData()
 	}
 
@@ -64,7 +76,8 @@ private extension MainView {
         
         rocketInfoCollectionView.backgroundColor = SpaceAppColor.background.darkVariant
         rocketInfoCollectionView.layer.cornerRadius = 30
-        rocketInfoCollectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]    }
+        rocketInfoCollectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
 
 	// MARK: - Setup Layout
 
@@ -82,19 +95,6 @@ private extension MainView {
             $0.bottom.equalTo(bottomPageControl.snp.top)
             $0.top.equalTo(backgroundImageView.snp.bottom).offset(-30)
         }
-	}
-
-	// MARK: - Setup Behavior
-
-	func setupBehavior() {
-        rocketInfoCollectionView.register(
-            RocketCollectionVerticalCell.self,
-            forCellWithReuseIdentifier: RocketCollectionVerticalCell.identifier
-        )
-        rocketInfoCollectionView.register(
-            RocketCollectionHorizontalCell.self,
-            forCellWithReuseIdentifier: RocketCollectionHorizontalCell.identifier
-        )
 	}
 
 	// MARK: - Setup Data
@@ -144,17 +144,21 @@ private extension MainView {
                 heightDimension: .absolute(100)
             )
             
+            let sectionNameSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(30)
+            )
+            
             // MARK: Section layout
             
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = .init(top: 10, leading: 30, bottom: 10, trailing: 30)
             
-            // TODO: Add sections text headers
             switch sectionIndex {
             case 0:
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: headerFooterSize,
-                    elementKind: UICollectionView.elementKindSectionHeader,
+                    elementKind: RocketCollectionHeaderView.identifier,
                     alignment: .top
                 )
                 section.boundarySupplementaryItems = [sectionHeader]
@@ -162,12 +166,17 @@ private extension MainView {
             case (SectionType.allCases.count - 1):
                 let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: headerFooterSize,
-                    elementKind: UICollectionView.elementKindSectionFooter,
+                    elementKind: RocketCollectionFooterView.identifier,
                     alignment: .bottom
                 )
                 section.boundarySupplementaryItems = [sectionFooter]
             default:
-                section.boundarySupplementaryItems = []
+                let sectionName = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: sectionNameSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .bottom
+                )
+                section.boundarySupplementaryItems = [sectionName]
             }
             
             return section

@@ -15,8 +15,10 @@ final class MainViewController: GenericViewController<MainView> {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
         setupRocketInfoCollectionView()
         setupRocketInfoCollectionDataSource()
+        setupBehavior()
         addFooterHeader()
         addTestData()
 	}
@@ -29,9 +31,22 @@ extension MainViewController: UICollectionViewDelegate {
         rootView.rocketInfoCollectionView.delegate = self
     }
     
+    // MARK: - Setup Behavior
+
+    func setupBehavior() {
+        rootView.rocketInfoCollectionView.register(
+            RocketCollectionVerticalCell.self,
+            forCellWithReuseIdentifier: RocketCollectionVerticalCell.identifier
+        )
+        rootView.rocketInfoCollectionView.register(
+            RocketCollectionHorizontalCell.self,
+            forCellWithReuseIdentifier: RocketCollectionHorizontalCell.identifier
+        )
+    }
+    
     // MARK: - Setup Collection DataSource
     
-    func setupRocketInfoCollectionDataSource() {
+    private func setupRocketInfoCollectionDataSource() {
         rocketDataSource = UICollectionViewDiffableDataSource<MainView.SectionType, Int>(
             collectionView: rootView.rocketInfoCollectionView
         ) { _, indexPath, itemIdentifier in
@@ -45,39 +60,61 @@ extension MainViewController: UICollectionViewDelegate {
                 cellIdentifier = RocketCollectionVerticalCell.identifier
             }
             
-            return self.rootView.rocketInfoCollectionView.dequeueReusableCell(
+            let cell = self.rootView.rocketInfoCollectionView.dequeueReusableCell(
                 withReuseIdentifier: cellIdentifier,
                 for: indexPath
             )
+            if let cell = cell as? RocketCollectionVerticalCell, indexPath.section > 1 {
+                cell.cellType = 1
+            }
+            
+            return cell
         }
     }
     
     // MARK: - Add footer and header
     
-    func addFooterHeader() {
-        let headerRegistration = UICollectionView.SupplementaryRegistration
-        <RocketCollectionHeaderView>(
-            elementKind: UICollectionView.elementKindSectionHeader
-        ) { _, _, _ in
-            // Configure if needed
+    private func addFooterHeader() {
+        let headerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionHeaderView>(
+            elementKind: RocketCollectionHeaderView.identifier
+        ) { supplementaryView, _, _ in
+            supplementaryView.viewController = self
         }
         
-        let footerRegistration = UICollectionView.SupplementaryRegistration
-        <RocketCollectionFooterView>(
-            elementKind: UICollectionView.elementKindSectionFooter
-        ) { _, _, _ in
-            // Configure if needed
+        let footerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionFooterView>(
+            elementKind: RocketCollectionFooterView.identifier
+        ) { supplementaryView, _, _ in
+            supplementaryView.viewController = self
+        }
+        
+        let sectionNameRegistration = UICollectionView.SupplementaryRegistration<UICollectionReusableView>(
+            elementKind: UICollectionView.elementKindSectionHeader
+        ) { supplementaryView, _, indexPath in
+            let sectionName = UILabel()
+            sectionName.text = MainView.SectionType(rawValue: indexPath.section + 1)?.sectionName.uppercased()
+            sectionName.font = .systemFont(ofSize: 20, weight: .semibold)
+            sectionName.textColor = .white
+            supplementaryView.addSubview(sectionName)
+            sectionName.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
         }
         
         rocketDataSource?.supplementaryViewProvider = { _, kind, index in
-            if kind == UICollectionView.elementKindSectionFooter {
+            switch kind {
+            case RocketCollectionFooterView.identifier:
                 return self.rootView.rocketInfoCollectionView.dequeueConfiguredReusableSupplementary(
                     using: footerRegistration,
                     for: index
                 )
-            } else {
+            case RocketCollectionHeaderView.identifier:
                 return self.rootView.rocketInfoCollectionView.dequeueConfiguredReusableSupplementary(
                     using: headerRegistration,
+                    for: index
+                )
+            default:
+                return self.rootView.rocketInfoCollectionView.dequeueConfiguredReusableSupplementary(
+                    using: sectionNameRegistration,
                     for: index
                 )
             }
@@ -85,7 +122,7 @@ extension MainViewController: UICollectionViewDelegate {
     }
      
     // FIXME: Remove test data from VC
-    func addTestData() {
+    private func addTestData() {
         var snapshot = NSDiffableDataSourceSnapshot<MainView.SectionType, Int>()
         snapshot.appendSections([.specificationInfo, .additionalInfo, .firstStageInfo, .secondStageInfo])
         snapshot.appendItems([0, 1, 2, 3, 4, 5], toSection: .specificationInfo)
