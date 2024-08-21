@@ -13,7 +13,6 @@ final class LaunchView: UIView {
 
     let tableView = UITableView(frame: .zero, style: .insetGrouped)
 
-
     // MARK: - Initialization
 
     override init(frame: CGRect) {

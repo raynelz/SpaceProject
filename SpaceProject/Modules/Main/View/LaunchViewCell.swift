@@ -12,13 +12,13 @@ final class LaunchViewCell: UITableViewCell {
     // MARK: - UI Components
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = SpaceAppColor.cellText.darkVariant
         return label
     }()
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = .systemFont(ofSize: 20, weight: .regular)
         label.textColor = SpaceAppColor.text.darkVariant
         return label
     }()
@@ -30,7 +30,7 @@ final class LaunchViewCell: UITableViewCell {
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        embedViews()
+        setupViews()
         setupLayout()
         setupCellAppearance()
     }
@@ -41,17 +41,16 @@ final class LaunchViewCell: UITableViewCell {
     func configure(with name: String, date: String, isSuccess: Bool) {
         nameLabel.text = name
         dateLabel.text = date
-        iconImageView.image = isSuccess ? UIImage(systemName: "checkmark.circle.fill") :
-        UIImage(systemName: "xmark.circle.fill")
-        iconImageView.tintColor = isSuccess ? .systemGreen : .systemRed
+        iconImageView.image = isSuccess ? UIImage(named: "rocket-done") :
+        UIImage(named: "rocket-fail")
     }
 }
 
 // MARK: - Private Methods
 
 private extension LaunchViewCell {
-    // MARK: - Embed Views
-    func embedViews() {
+    // MARK: - Setup Views
+    func setupViews() {
         contentView.addSubviews(nameLabel, dateLabel, iconImageView)
     }
     // MARK: - Setup Appearance
