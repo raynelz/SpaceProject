@@ -9,7 +9,16 @@ import UIKit
 
 /// Контроллер главного экрана
 final class MainViewController: GenericViewController<MainView> {
-    var rocketDataSource: UICollectionViewDiffableDataSource<MainView.SectionType, Int>?
+    typealias DataSource = UICollectionViewDiffableDataSource<
+        RocketCollectionModel.SectionType,
+        RocketCollectionModel.CellData
+    >
+    typealias DataSnapshot = NSDiffableDataSourceSnapshot<
+        RocketCollectionModel.SectionType,
+        RocketCollectionModel.CellData
+    >
+    
+    var rocketDataSource: DataSource?
     
 	// MARK: - Life Cycle
 
@@ -20,20 +29,21 @@ final class MainViewController: GenericViewController<MainView> {
         setupRocketInfoCollectionDataSource()
         setupBehavior()
         addFooterHeader()
-        addTestData()
+        
+        setupData(RocketCollectionModel.getTestData())
 	}
 }
 
 extension MainViewController: UICollectionViewDelegate {
     // MARK: - Setup Rocket Collection View
 
-    func setupRocketInfoCollectionView() {
+    private func setupRocketInfoCollectionView() {
         rootView.rocketInfoCollectionView.delegate = self
     }
     
     // MARK: - Setup Behavior
 
-    func setupBehavior() {
+    private func setupBehavior() {
         rootView.rocketInfoCollectionView.register(
             RocketCollectionVerticalCell.self,
             forCellWithReuseIdentifier: RocketCollectionVerticalCell.identifier
@@ -47,13 +57,12 @@ extension MainViewController: UICollectionViewDelegate {
     // MARK: - Setup Collection DataSource
     
     private func setupRocketInfoCollectionDataSource() {
-        rocketDataSource = UICollectionViewDiffableDataSource<MainView.SectionType, Int>(
+        rocketDataSource = DataSource(
             collectionView: rootView.rocketInfoCollectionView
-        ) { _, indexPath, itemIdentifier in
-            // TODO: Change info in cells by data
+        ) { _, indexPath, itemData in
             let cellIdentifier: String
             
-            switch indexPath.section {
+            switch itemData.sectionNumber {
             case 0:
                 cellIdentifier = RocketCollectionHorizontalCell.identifier
             default:
@@ -64,8 +73,11 @@ extension MainViewController: UICollectionViewDelegate {
                 withReuseIdentifier: cellIdentifier,
                 for: indexPath
             )
-            if let cell = cell as? RocketCollectionVerticalCell, indexPath.section > 1 {
-                cell.cellType = 1
+            
+            if let cell = cell as? RocketCollectionVerticalCell {
+                cell.setupData(itemData)
+            } else if let cell = cell as? RocketCollectionHorizontalCell {
+                cell.setupData(itemData)
             }
             
             return cell
@@ -90,11 +102,19 @@ extension MainViewController: UICollectionViewDelegate {
         let sectionNameRegistration = UICollectionView.SupplementaryRegistration<UICollectionReusableView>(
             elementKind: UICollectionView.elementKindSectionHeader
         ) { supplementaryView, _, indexPath in
-            let sectionName = UILabel()
-            sectionName.text = MainView.SectionType(rawValue: indexPath.section + 1)?.sectionName.uppercased()
-            sectionName.font = .systemFont(ofSize: 20, weight: .semibold)
-            sectionName.textColor = .white
+            let sectionName = {
+                let sectionNameLabel = UILabel()
+                sectionNameLabel.text = RocketCollectionModel
+                    .SectionType(rawValue: indexPath.section + 1)?
+                    .sectionName
+                    .uppercased()
+                sectionNameLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+                sectionNameLabel.textColor = .white
+                return sectionNameLabel
+            }()
+            
             supplementaryView.addSubview(sectionName)
+            
             sectionName.snp.makeConstraints {
                 $0.edges.equalToSuperview()
             }
@@ -120,15 +140,19 @@ extension MainViewController: UICollectionViewDelegate {
             }
         }
     }
-     
-    // FIXME: Remove test data from VC
-    private func addTestData() {
-        var snapshot = NSDiffableDataSourceSnapshot<MainView.SectionType, Int>()
-        snapshot.appendSections([.specificationInfo, .additionalInfo, .firstStageInfo, .secondStageInfo])
-        snapshot.appendItems([0, 1, 2, 3, 4, 5], toSection: .specificationInfo)
-        snapshot.appendItems([6, 7, 8], toSection: .additionalInfo)
-        snapshot.appendItems([9, 10, 11], toSection: .firstStageInfo)
-        snapshot.appendItems([12, 13], toSection: .secondStageInfo)
+    
+    // MARK: Setup data
+    
+    func setupData(_ data: [RocketCollectionModel.CellData]) {
+        var snapshot = DataSnapshot()
+        snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
+        data.forEach {
+            guard let section = RocketCollectionModel.SectionType(rawValue: $0.sectionNumber) else {
+                fatalError("Error! Incorrect section index!")
+            }
+            
+            snapshot.appendItems([$0], toSection: section)
+        }
         rocketDataSource?.apply(snapshot)
     }
 }

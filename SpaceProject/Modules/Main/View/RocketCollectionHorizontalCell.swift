@@ -12,8 +12,8 @@ final class RocketCollectionHorizontalCell: UICollectionViewCell {
     static let identifier = "RocketCollectionHorizontalCell"
     
     // MARK: - UI Components
-    let mainLabel = UILabel()
-    let secondaryLabel = UILabel()
+    private let mainLabel = UILabel()
+    private let secondaryLabel = UILabel()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -72,6 +72,20 @@ private extension RocketCollectionHorizontalCell {
         secondaryLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.centerY.equalToSuperview().offset(10)
+        }
+    }
+}
+
+extension RocketCollectionHorizontalCell {
+    // MARK: - Setup data
+    
+    func setupData(_ data: RocketCollectionModel.CellData) {
+        mainLabel.text = data.mainText
+        
+        if let units = data.unitsOfMeasurement {
+            secondaryLabel.text = "\(data.secondaryText), \(units)"
+        } else {
+            secondaryLabel.text = data.secondaryText
         }
     }
 }

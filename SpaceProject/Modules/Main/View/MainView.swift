@@ -13,27 +13,6 @@ final class MainView: UIView {
     let backgroundImageView = UIImageView()
     let bottomPageControl = UIPageControl()
     let rocketInfoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-    
-    // FIXME: Change types location
-    enum SectionType: Int, CaseIterable {
-        case specificationInfo
-        case additionalInfo
-        case firstStageInfo
-        case secondStageInfo
-        
-        var sectionName: String {
-            switch self {
-            case .specificationInfo:
-                return "Технические характеристики"
-            case .additionalInfo:
-                return "Дополнительная информация"
-            case .firstStageInfo:
-                return "Первая ступень"
-            case .secondStageInfo:
-                return "Вторая ступень"
-            }
-        }
-    }
 
     // MARK: - Initialization
 	override init(frame: CGRect) {
@@ -105,8 +84,8 @@ private extension MainView {
     // MARK: - Setup CollectionView Layout
     
     func setupCollectionViewLayout() {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvoirment) -> NSCollectionLayoutSection? in
-            guard let sectionType = SectionType(rawValue: sectionIndex) else {
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
+            guard let sectionType = RocketCollectionModel.SectionType(rawValue: sectionIndex) else {
                 return nil
             }
             
@@ -163,7 +142,7 @@ private extension MainView {
                 )
                 section.boundarySupplementaryItems = [sectionHeader]
                 section.orthogonalScrollingBehavior = .continuous
-            case (SectionType.allCases.count - 1):
+            case (RocketCollectionModel.SectionType.allCases.count - 1):
                 let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: headerFooterSize,
                     elementKind: RocketCollectionFooterView.identifier,

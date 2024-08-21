@@ -14,19 +14,19 @@ final class RocketCollectionVerticalCell: UICollectionViewCell {
     /// cellType:
     ///     0 - Standart horizontal cell
     ///     1 - Horizontal cell with units of measurement
-    var cellType = 0 {
+    private var cellType = 0 {
         didSet {
             updateUnitsVisability()
         }
     }
     
-    var standartRightLabelConstraint: Constraint?
-    var rightWithUnitsConstraint: Constraint?
+    private var standartRightLabelConstraint: Constraint?
+    private var rightWithUnitsConstraint: Constraint?
     
     // MARK: - UI Components
-    let leftLabel = UILabel()
-    let rightLabel = UILabel()
-    let unitsLabel = UILabel()
+    private let leftLabel = UILabel()
+    private let rightLabel = UILabel()
+    private let unitsLabel = UILabel()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -42,7 +42,6 @@ final class RocketCollectionVerticalCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 // MARK: - Private Methods
 
@@ -86,25 +85,21 @@ private extension RocketCollectionVerticalCell {
             $0.centerY.equalToSuperview()
             $0.right.equalTo(rightLabel.snp.left)
         }
-        
-        // FIXME: Constrains conflict?...
+
         rightLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             standartRightLabelConstraint = $0.right.equalToSuperview().constraint
         }
         
         rightLabel.snp.prepareConstraints {
-            rightWithUnitsConstraint = $0.right.equalToSuperview().offset(-40).constraint
+            rightWithUnitsConstraint = $0.right.equalTo(unitsLabel.snp.left).offset(-5).constraint
         }
         
         unitsLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.right.equalToSuperview()
-            $0.left.equalTo(rightLabel.snp.right).offset(5)
+            $0.left.equalTo(self.snp.right).offset(-25)
         }
-        
-        standartRightLabelConstraint?.activate()
-        rightWithUnitsConstraint?.deactivate()
     }
     
     func updateUnitsVisability() {
@@ -123,10 +118,18 @@ private extension RocketCollectionVerticalCell {
     }
 }
 
-// MARK: - Prepare for reuse
-
 extension RocketCollectionVerticalCell {
-    override func prepareForReuse() {
-        cellType = 0
+    // MARK: - Setup data
+    
+    func setupData(_ data: RocketCollectionModel.CellData) {
+        leftLabel.text = data.mainText
+        rightLabel.text = data.secondaryText
+        
+        if let units = data.unitsOfMeasurement {
+            unitsLabel.text = units
+            cellType = 1
+        } else {
+            cellType = 0
+        }
     }
 }
