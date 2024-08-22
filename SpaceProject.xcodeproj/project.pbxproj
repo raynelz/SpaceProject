@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E446E2C773E4B0027A4C9 /* Colors.swift */; };
 		EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD352C679C430064134D /* AppDelegate.swift */; };
 		EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD372C679C430064134D /* SceneDelegate.swift */; };
 		EC4EDD3F2C679C440064134D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD3E2C679C440064134D /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C98E446E2C773E4B0027A4C9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EC4EDD322C679C430064134D /* SpaceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4EDD352C679C430064134D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC4EDD372C679C430064134D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		EC4EDD562C67A11A0064134D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C98E446E2C773E4B0027A4C9 /* Colors.swift */,
 				EC4EDD432C679C440064134D /* Info.plist */,
 				EC4EDD402C679C440064134D /* LaunchScreen.storyboard */,
 				EC4EDD3E2C679C440064134D /* Assets.xcassets */,
@@ -249,6 +252,7 @@
 				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
+				C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
 				EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */,
