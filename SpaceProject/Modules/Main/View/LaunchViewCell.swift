@@ -13,13 +13,13 @@ final class LaunchViewCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .regular)
-        label.textColor = SpaceAppColor.text.darkVariant
+        label.textColor = SpaceAppColor.text
         return label
     }()
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.textColor = SpaceAppColor.cellText.darkVariant
+        label.textColor = SpaceAppColor.cellText
         return label
     }()
     private let iconImageView: UIImageView = {
@@ -56,12 +56,12 @@ private extension LaunchViewCell {
     // MARK: - Setup Appearance
     func setupCellAppearance() {
         backgroundColor = .clear
-        contentView.backgroundColor = SpaceAppColor.cellBackground.darkVariant
+        contentView.backgroundColor = SpaceAppColor.cellBackground
         contentView.layer.cornerRadius = 20
         contentView.layer.masksToBounds = true
         // Selected Cell
         let selectedBackgroundColor = UIView()
-        selectedBackgroundColor.backgroundColor = SpaceAppColor.cellBackground.darkVariant
+        selectedBackgroundColor.backgroundColor = SpaceAppColor.cellBackground
         self.selectedBackgroundView = selectedBackgroundColor
         self.selectedBackgroundView?.layer.cornerRadius = 20
     }

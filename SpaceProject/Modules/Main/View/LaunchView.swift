@@ -40,8 +40,8 @@ private extension LaunchView {
     // MARK: - Setup Appearance
 
     func setupAppearance() {
-        backgroundColor = SpaceAppColor.background.darkVariant
-        tableView.backgroundColor = SpaceAppColor.background.darkVariant
+        backgroundColor = SpaceAppColor.background
+        tableView.backgroundColor = SpaceAppColor.background
     }
 
     // MARK: - Setup Layout

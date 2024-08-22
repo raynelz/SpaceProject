@@ -16,18 +16,20 @@ final class LaunchViewController: GenericViewController<LaunchView> {
     // MARK: - Private Methods
     private func setupNavigationBar() {
         self.title = "Falcon Heavy"
-        self.navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = SpaceAppColor.background.darkVariant
+        self.navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.barTintColor = SpaceAppColor.background
         self.navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: SpaceAppColor.textSecondary!
         ]
-        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.tintColor = SpaceAppColor.background
         let leftButton = UIBarButtonItem(
             title: "Назад",
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
+
         )
+        leftButton.tintColor = SpaceAppColor.textSecondary
         self.navigationItem.leftBarButtonItem = leftButton
     }
     @objc private func backButtonTapped() {
