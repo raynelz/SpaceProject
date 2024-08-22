@@ -12,14 +12,14 @@ final class LaunchViewCell: UITableViewCell {
     // MARK: - UI Components
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = SpaceAppColor.cellText.darkVariant
+        label.font = .systemFont(ofSize: 22, weight: .regular)
+        label.textColor = SpaceAppColor.text.darkVariant
         return label
     }()
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .regular)
-        label.textColor = SpaceAppColor.text.darkVariant
+        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.textColor = SpaceAppColor.cellText.darkVariant
         return label
     }()
     private let iconImageView: UIImageView = {
@@ -55,20 +55,25 @@ private extension LaunchViewCell {
     }
     // MARK: - Setup Appearance
     func setupCellAppearance() {
+        backgroundColor = .clear
         contentView.backgroundColor = SpaceAppColor.cellBackground.darkVariant
-        contentView.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 20
         contentView.layer.masksToBounds = true
+        // Selected Cell
+        let selectedBackgroundColor = UIView()
+        selectedBackgroundColor.backgroundColor = SpaceAppColor.cellBackground.darkVariant
+        self.selectedBackgroundView = selectedBackgroundColor
+        self.selectedBackgroundView?.layer.cornerRadius = 20
     }
     // MARK: - Setup Layout
     func setupLayout() {
         nameLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().inset(8)
+            make.top.equalToSuperview().inset(25)
         }
         dateLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel.snp.leading)
-            make.top.equalTo(nameLabel.snp.bottom).offset(4)
-            make.bottom.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(25)
         }
         iconImageView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)

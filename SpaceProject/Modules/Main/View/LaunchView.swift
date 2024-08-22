@@ -41,8 +41,6 @@ private extension LaunchView {
 
     func setupAppearance() {
         backgroundColor = SpaceAppColor.background.darkVariant
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "LaunchCell")
         tableView.backgroundColor = SpaceAppColor.background.darkVariant
     }
 
@@ -50,7 +48,8 @@ private extension LaunchView {
 
     func setupLayout() {
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(20)
         }
     }
 }

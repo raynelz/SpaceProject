@@ -16,6 +16,8 @@ final class LaunchViewController: GenericViewController<LaunchView> {
     // MARK: - Private Methods
     private func setupNavigationBar() {
         self.title = "Falcon Heavy"
+        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = SpaceAppColor.background.darkVariant
         self.navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
@@ -65,11 +67,15 @@ extension LaunchViewController: UITableViewDataSource {
 
 extension LaunchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100 // Высота ячейки
+        return 100
     }
-
-    // Задаем высоту отступа между ячейками через Footer
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10 // Высота отступа между секциями
+        return 1
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = .clear
+        footerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 1)
+        return footerView
     }
 }
