@@ -12,6 +12,7 @@
 		85670DBD2C732BFC006661E6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBC2C732BFC006661E6 /* LaunchViewController.swift */; };
 		85670DBF2C745B08006661E6 /* LaunchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBE2C745B08006661E6 /* LaunchViewCell.swift */; };
 		85670DC12C7460A6006661E6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DC02C7460A6006661E6 /* Colors.swift */; };
+		C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E446E2C773E4B0027A4C9 /* Colors.swift */; };
 		EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD352C679C430064134D /* AppDelegate.swift */; };
 		EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD372C679C430064134D /* SceneDelegate.swift */; };
 		EC4EDD3F2C679C440064134D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD3E2C679C440064134D /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		85670DBC2C732BFC006661E6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		85670DBE2C745B08006661E6 /* LaunchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewCell.swift; sourceTree = "<group>"; };
 		85670DC02C7460A6006661E6 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = ../../../../../Downloads/Colors.swift; sourceTree = "<group>"; };
+		C98E446E2C773E4B0027A4C9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EC4EDD322C679C430064134D /* SpaceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4EDD352C679C430064134D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC4EDD372C679C430064134D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				85670DC02C7460A6006661E6 /* Colors.swift */,
+				C98E446E2C773E4B0027A4C9 /* Colors.swift */,
 				EC4EDD432C679C440064134D /* Info.plist */,
 				EC4EDD402C679C440064134D /* LaunchScreen.storyboard */,
 				EC4EDD3E2C679C440064134D /* Assets.xcassets */,
@@ -267,6 +270,7 @@
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				85670DBF2C745B08006661E6 /* LaunchViewCell.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
+				C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
 				85670DB92C7328B0006661E6 /* Launch.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
