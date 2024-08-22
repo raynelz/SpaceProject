@@ -49,14 +49,14 @@ private extension RocketCollectionHeaderView {
     func setupAppearance() {
         rocketNameLabel.font = .systemFont(ofSize: 25, weight: .semibold)
         // TODO: Add localization and color switch
-        rocketNameLabel.textColor = SpaceAppColor.text.darkVariant
+        rocketNameLabel.textColor = SpaceAppColor.text
         rocketNameLabel.text = "Falcon Heavy"
         
         settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
         settingsButton.contentVerticalAlignment = .fill
         settingsButton.contentHorizontalAlignment = .fill
         // TODO: Add color switch
-        settingsButton.tintColor = SpaceAppColor.cellText.lightVariant
+        settingsButton.tintColor = SpaceAppColor.cellText
     }
     
     // MARK: - Setup Layout

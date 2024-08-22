@@ -44,9 +44,9 @@ private extension RocketCollectionFooterView {
     func setupAppearance() {
         // TODO: Add localization and color switch
         launchesNavigationButton.setTitle("Посмотреть запуски", for: .normal)
-        launchesNavigationButton.backgroundColor = SpaceAppColor.cellBackground.lightVariant
+        launchesNavigationButton.backgroundColor = SpaceAppColor.cellBackground
         launchesNavigationButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        launchesNavigationButton.setTitleColor(SpaceAppColor.text.lightVariant, for: .normal)
+        launchesNavigationButton.setTitleColor(SpaceAppColor.text, for: .normal)
         launchesNavigationButton.layer.cornerRadius = 10
     }
     

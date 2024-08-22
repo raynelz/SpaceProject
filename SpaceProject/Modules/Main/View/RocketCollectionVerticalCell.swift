@@ -60,15 +60,15 @@ private extension RocketCollectionVerticalCell {
     
     func setupAppearance() {
         leftLabel.text = "LeftLabel"
-        leftLabel.textColor = SpaceAppColor.cellText.darkVariant
+        leftLabel.textColor = SpaceAppColor.cellText
         leftLabel.textAlignment = .left
         
         rightLabel.text = "RightLabel"
-        rightLabel.textColor = SpaceAppColor.text.darkVariant
+        rightLabel.textColor = SpaceAppColor.text
         rightLabel.textAlignment = .right
         
         unitsLabel.text = "UM"
-        unitsLabel.textColor = SpaceAppColor.cellText.darkVariant
+        unitsLabel.textColor = SpaceAppColor.cellText
         unitsLabel.textAlignment = .left
         unitsLabel.isHidden = true
         

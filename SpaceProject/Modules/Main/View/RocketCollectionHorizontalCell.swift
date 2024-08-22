@@ -46,14 +46,14 @@ private extension RocketCollectionHorizontalCell {
     
     func setupAppearance() {
         layer.cornerRadius = 40
-        backgroundColor = SpaceAppColor.cellBackground.darkVariant
+        backgroundColor = SpaceAppColor.cellBackground
         
         mainLabel.text = "MainLabel"
-        mainLabel.textColor = SpaceAppColor.text.darkVariant
+        mainLabel.textColor = SpaceAppColor.text
         mainLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         
         secondaryLabel.text = "SecondaryLabel"
-        secondaryLabel.textColor = SpaceAppColor.cellText.darkVariant
+        secondaryLabel.textColor = SpaceAppColor.cellText
         secondaryLabel.font = .systemFont(ofSize: 15)
         
         [mainLabel, secondaryLabel].forEach {

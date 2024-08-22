@@ -109,7 +109,7 @@ extension MainViewController: UICollectionViewDelegate {
                     .sectionName
                     .uppercased()
                 sectionNameLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-                sectionNameLabel.textColor = .white
+                sectionNameLabel.textColor = SpaceAppColor.text
                 return sectionNameLabel
             }()
             

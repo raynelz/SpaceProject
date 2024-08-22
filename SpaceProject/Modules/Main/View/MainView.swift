@@ -48,12 +48,12 @@ private extension MainView {
 
 	func setupAppearance() {
         // TODO: Add color switch by theme
-        backgroundImageView.backgroundColor = SpaceAppColor.backgroundSecondary.lightVariant
+        backgroundImageView.backgroundColor = SpaceAppColor.backgroundSecondary
         
-        bottomPageControl.backgroundColor = SpaceAppColor.backgroundSecondary.darkVariant
+        bottomPageControl.backgroundColor = SpaceAppColor.backgroundSecondary
         bottomPageControl.numberOfPages = 1
         
-        rocketInfoCollectionView.backgroundColor = SpaceAppColor.background.darkVariant
+        rocketInfoCollectionView.backgroundColor = SpaceAppColor.background
         rocketInfoCollectionView.layer.cornerRadius = 30
         rocketInfoCollectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
