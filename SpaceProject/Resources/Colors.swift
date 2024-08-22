@@ -13,5 +13,5 @@ enum SpaceAppColor {
     static let background = UIColor.systemBackground
     static let textSecondary = UIColor(named: "TextSecondaryColor")
     static let cellText = UIColor(named: "CellTextColor")
-    static let text = UIColor.lightText
+    static let text = UIColor.label
 }
