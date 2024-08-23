@@ -38,10 +38,10 @@ final class LaunchViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Configuration
-    func configure(with name: String, date: String, isSuccess: Bool) {
-        nameLabel.text = name
-        dateLabel.text = date
-        iconImageView.image = isSuccess ? UIImage(named: "rocket-done") :
+    func configure(model: Launch) {
+        nameLabel.text = model.name
+        dateLabel.text = model.date
+        iconImageView.image = model.launchIs ? UIImage(named: "rocket-done") :
         UIImage(named: "rocket-fail")
     }
 }

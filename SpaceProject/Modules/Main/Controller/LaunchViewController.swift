@@ -2,17 +2,19 @@ import UIKit
 
 final class LaunchViewController: GenericViewController<LaunchView> {
     // MARK: - Properties
-
-    private let launches = makeLaunches()
-
+    
+    private let launches = LaunchMockTest.launches
+    
     // MARK: - Life Cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
     }
+}
 
+private extension LaunchViewController {
     // MARK: - Private Methods
     private func setupNavigationBar() {
         self.title = "Falcon Heavy"
@@ -22,12 +24,12 @@ final class LaunchViewController: GenericViewController<LaunchView> {
             .foregroundColor: SpaceAppColor.textSecondary!
         ]
         self.navigationController?.navigationBar.tintColor = SpaceAppColor.background
-        let leftButton = UIBarButtonItem(
+        let leftButton = UIBarButtonItem (
             title: "Назад",
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
-
+            
         )
         leftButton.tintColor = SpaceAppColor.textSecondary
         self.navigationItem.leftBarButtonItem = leftButton
@@ -42,7 +44,6 @@ final class LaunchViewController: GenericViewController<LaunchView> {
         rootView.tableView.reloadData()
     }
 }
-
 // MARK: - UITableViewDataSource
 
 extension LaunchViewController: UITableViewDataSource {
@@ -52,15 +53,15 @@ extension LaunchViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         launches.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchCell", for: indexPath)
                 as? LaunchViewCell else {
             fatalError("Ячейка не найдена")
         }
-
+        
         let launch = launches[indexPath.section]
-        cell.configure(with: launch.name, date: launch.date, isSuccess: launch.launchIs)
+        cell.configure(model: launch)
         return cell
     }
 }

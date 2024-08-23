@@ -11,6 +11,7 @@
 		85670DBB2C732BEC006661E6 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBA2C732BEC006661E6 /* LaunchView.swift */; };
 		85670DBD2C732BFC006661E6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBC2C732BFC006661E6 /* LaunchViewController.swift */; };
 		85670DBF2C745B08006661E6 /* LaunchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBE2C745B08006661E6 /* LaunchViewCell.swift */; };
+		85B3AFA62C784284000460BD /* LauchMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B3AFA52C784284000460BD /* LauchMock.swift */; };
 		C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E446E2C773E4B0027A4C9 /* Colors.swift */; };
 		EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD352C679C430064134D /* AppDelegate.swift */; };
 		EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD372C679C430064134D /* SceneDelegate.swift */; };
@@ -28,6 +29,7 @@
 		85670DBA2C732BEC006661E6 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		85670DBC2C732BFC006661E6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		85670DBE2C745B08006661E6 /* LaunchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewCell.swift; sourceTree = "<group>"; };
+		85B3AFA52C784284000460BD /* LauchMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauchMock.swift; sourceTree = "<group>"; };
 		C98E446E2C773E4B0027A4C9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EC4EDD322C679C430064134D /* SpaceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4EDD352C679C430064134D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85B3AFA42C784276000460BD /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				85B3AFA52C784284000460BD /* LauchMock.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		EC4EDD292C679C430064134D = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +167,7 @@
 		EC4EDD5B2C67A1A20064134D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				85B3AFA42C784276000460BD /* Tests */,
 				EC4EDD4D2C679EAC0064134D /* Extensions */,
 			);
 			path = Utilities;
@@ -262,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
+				85B3AFA62C784284000460BD /* LauchMock.swift in Sources */,
 				85670DBB2C732BEC006661E6 /* LaunchView.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				85670DBF2C745B08006661E6 /* LaunchViewCell.swift in Sources */,
