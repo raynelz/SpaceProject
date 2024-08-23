@@ -8,13 +8,15 @@
 import UIKit
 import SnapKit
 
+/// FooterView коллекции ракеты
 final class RocketCollectionFooterView: UICollectionReusableView {
     static let identifier = "RocketCollectionFooterView"
     
+    /// Для установки Parent View Controller для того чтобы дергать Navigation Controller
     weak var viewController: UIViewController?
     
     // MARK: - UI Components
-    let launchesNavigationButton = UIButton()
+    private let launchesNavigationButton = UIButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -42,7 +44,6 @@ private extension RocketCollectionFooterView {
     // MARK: - Setup Appearance
     
     func setupAppearance() {
-        // TODO: Add localization and color switch
         launchesNavigationButton.setTitle("Посмотреть запуски", for: .normal)
         launchesNavigationButton.backgroundColor = SpaceAppColor.cellBackground
         launchesNavigationButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
@@ -69,8 +70,6 @@ private extension RocketCollectionFooterView {
     func navigateToLaunches() {
         launchesNavigationButton.animateTap()
         
-        // TODO: Connect launches VC
-        let launchesViewController = UIViewController()
-        viewController?.navigationController?.pushViewController(launchesViewController, animated: true)
+        // Push launches view controller
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9625B7F2C79227A00848AC0 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9625B7E2C79227A00848AC0 /* MockData.swift */; };
 		C98E44712C77406D0027A4C9 /* RocketCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */; };
 		C9C118402C70F26000F305FE /* RocketCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1183F2C70F26000F305FE /* RocketCollectionHeaderView.swift */; };
 		C9C118422C70F2A300F305FE /* RocketCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C118412C70F2A300F305FE /* RocketCollectionFooterView.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C9625B7E2C79227A00848AC0 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketCollectionModel.swift; sourceTree = "<group>"; };
 		C9C1183F2C70F26000F305FE /* RocketCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCollectionHeaderView.swift; sourceTree = "<group>"; };
 		C9C118412C70F2A300F305FE /* RocketCollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCollectionFooterView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */,
+				C9625B7E2C79227A00848AC0 /* MockData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
+				C9625B7F2C79227A00848AC0 /* MockData.swift in Sources */,
 				C9C485782C70949A009B800D /* Colors.swift in Sources */,
 				C9C118422C70F2A300F305FE /* RocketCollectionFooterView.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,

@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+/// Горизонтальная ячейка коллекции ракеты
 final class RocketCollectionHorizontalCell: UICollectionViewCell {
     static let identifier = "RocketCollectionHorizontalCell"
     

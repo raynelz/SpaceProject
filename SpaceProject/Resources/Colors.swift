@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Цветовая тема приложения
 enum SpaceAppColor {
     static let backgroundSecondary = UIColor(named: "BackgroundSecondaryColor")
     static let cellBackground = UIColor(named: "CellBackgroundColor")

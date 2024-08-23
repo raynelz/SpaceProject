@@ -9,16 +9,16 @@ import UIKit
 
 /// Контроллер главного экрана
 final class MainViewController: GenericViewController<MainView> {
-    typealias DataSource = UICollectionViewDiffableDataSource<
+    private typealias DataSource = UICollectionViewDiffableDataSource<
         RocketCollectionModel.SectionType,
         RocketCollectionModel.CellData
     >
-    typealias DataSnapshot = NSDiffableDataSourceSnapshot<
+    private typealias DataSnapshot = NSDiffableDataSourceSnapshot<
         RocketCollectionModel.SectionType,
         RocketCollectionModel.CellData
     >
     
-    var rocketDataSource: DataSource?
+    private var rocketDataSource: DataSource?
     
 	// MARK: - Life Cycle
 
@@ -30,17 +30,21 @@ final class MainViewController: GenericViewController<MainView> {
         setupBehavior()
         addFooterHeader()
         
-        setupData(RocketCollectionModel.getTestData())
+        setupData(MockData.collectionMockData)
 	}
 }
 
 extension MainViewController: UICollectionViewDelegate {
     // MARK: - Setup Rocket Collection View
-
+    
     private func setupRocketInfoCollectionView() {
         rootView.rocketInfoCollectionView.delegate = self
     }
-    
+}
+
+// MARK: - Private Methods
+
+private extension MainViewController {
     // MARK: - Setup Behavior
 
     private func setupBehavior() {

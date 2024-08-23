@@ -8,14 +8,16 @@
 import UIKit
 import SnapKit
 
+/// HeaderView коллекции ракеты
 final class RocketCollectionHeaderView: UICollectionReusableView {
     static let identifier = "RocketCollectionHeaderView"
     
+    /// Для установки Parent View Controller для того чтобы дергать Navigation Controller
     weak var viewController: UIViewController?
     
     // MARK: - UI Components
-    let rocketNameLabel = UILabel()
-    let settingsButton = UIButton()
+    private let rocketNameLabel = UILabel()
+    private let settingsButton = UIButton()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -48,14 +50,12 @@ private extension RocketCollectionHeaderView {
     
     func setupAppearance() {
         rocketNameLabel.font = .systemFont(ofSize: 25, weight: .semibold)
-        // TODO: Add localization and color switch
         rocketNameLabel.textColor = SpaceAppColor.text
         rocketNameLabel.text = "Falcon Heavy"
         
         settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
         settingsButton.contentVerticalAlignment = .fill
         settingsButton.contentHorizontalAlignment = .fill
-        // TODO: Add color switch
         settingsButton.tintColor = SpaceAppColor.cellText
     }
     
@@ -86,8 +86,6 @@ private extension RocketCollectionHeaderView {
     func navigateToSettings() {
         settingsButton.animateTap()
         
-        // TODO: Connect settings VC
-        let settingsViewController = UIViewController()
-        viewController?.navigationController?.pushViewController(settingsViewController, animated: true)
+        // Open settings bottom sheet
     }
 }
