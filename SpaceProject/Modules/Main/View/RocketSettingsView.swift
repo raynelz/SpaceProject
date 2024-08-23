@@ -66,13 +66,11 @@ private extension RocketSettingsView {
     
     private func setupLayout() {
         verticalStack.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).inset(40)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(snp.topMargin).offset(40)
+            make.horizontalEdges.equalToSuperview().inset(20)
         }
     }
-
-
+    
     //MARK: - Creating SegmentedControl
     
     func createLabels(name: String) -> UILabel {
