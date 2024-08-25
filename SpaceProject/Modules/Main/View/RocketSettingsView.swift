@@ -57,13 +57,19 @@ final class RocketSettingsView: UIView {
 // MARK: - Private Methods
 
 private extension RocketSettingsView {
+    // MARK: View Setup
+    
     func setupViews() {
         addSubview(verticalStack)
     }
     
+    // MARK: Appearance Configuration
+    
     func setupAppearance() {
-        self.backgroundColor = SpaceAppColor.background
+        backgroundColor = SpaceAppColor.background
     }
+    
+    // MARK: Layout Configuration
     
     func setupLayout() {
         verticalStack.snp.makeConstraints { make in
@@ -71,6 +77,8 @@ private extension RocketSettingsView {
             make.horizontalEdges.equalToSuperview().inset(20)
         }
     }
+    
+    // MARK: Label Creation
     
     func createLabels(name: String) -> UILabel {
         let label = UILabel()
@@ -80,6 +88,8 @@ private extension RocketSettingsView {
         return label
     }
     
+    // MARK: StackView Creation
+    
     func makeHorizontalStack(elements: [UIView], spacing: CGFloat = 10, alignment: UIStackView.Alignment = .fill, distribution: UIStackView.Distribution = .fillEqually) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: elements)
         stackView.axis = .horizontal
@@ -88,6 +98,8 @@ private extension RocketSettingsView {
         stackView.distribution = distribution
         return stackView
     }
+    
+    // MARK:  Segmented Control Creation
     
     func createSegmentedControl(typeOfMeasurement: TypeOfMeasurement) -> UISegmentedControl {
         let items: [String]
@@ -105,4 +117,6 @@ private extension RocketSettingsView {
         segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: SpaceAppColor.cellTextSeconary!], for: .selected)
         return segmentControl
     }
+}
+
 }

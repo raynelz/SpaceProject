@@ -7,7 +7,10 @@
 
 import UIKit
 
-class RocketSettingsViewController: GenericViewController<RocketSettingsView> {
+/// Контроллер для экрана настроек отображения параметров ракеты.
+/// Управляет пользовательским интерфейсом для изменения и настройки параметров ракеты.
+final class RocketSettingsViewController: GenericViewController<RocketSettingsView> {
+
     
     //MARK: - Life Cycle
     
@@ -25,16 +28,20 @@ private extension RocketSettingsViewController {
         title = "Настройки"
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.barTintColor = SpaceAppColor.background
+        
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: SpaceAppColor.textSecondary!
         ]
+        
         navigationController?.navigationBar.tintColor = SpaceAppColor.background
+        
         let rightButton = UIBarButtonItem(
             title: "Закрыть",
             style: .done,
             target: nil,
             action: #selector(closeButtonTapped)
         )
+        
         rightButton.tintColor = SpaceAppColor.textSecondary
         navigationItem.rightBarButtonItem = rightButton
     }
@@ -45,10 +52,5 @@ private extension RocketSettingsViewController {
     }
     
     func setupSegmentedControls() {
-        let segmentedControls = rootView.getSegmentedControls()
-        
-        //        segmentedControls.forEach {
-        //            $0.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
-        //        }
     }
 }
