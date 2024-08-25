@@ -3,8 +3,9 @@ import SnapKit
 
 /// Представление для экрана настроек отображения параметров ракеты
 final class RocketSettingsView: UIView {
-    //MARK: - UI Components
+    // MARK: - UI Components
     
+    // Элементы горизонтальных стэков сверху вниз
     private lazy var label1 = createLabels(name: "Высота")
     private lazy var segment1 = createSegmentedControl(typeOfMeasurement: .height)
     
@@ -29,11 +30,11 @@ final class RocketSettingsView: UIView {
         stack.axis = .vertical
         stack.spacing = 30
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
+        stack.distribution = .fill
         return stack
     }()
     
-    //MARK: - Initialization
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -45,33 +46,31 @@ final class RocketSettingsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Public Methods
+    /// Возвращает массив всех сегментированных контролов на экране
+    func getSegmentedControls() -> [UISegmentedControl] {
+        return [segment1, segment2, segment3, segment4]
+    }
 }
 
-//MARK: - Private Methods
+// MARK: - Private Methods
 
 private extension RocketSettingsView {
-    //MARK: - Setup Views
-    
     func setupViews() {
         addSubview(verticalStack)
     }
-    
-    //MARK: - Setup Appearance
     
     func setupAppearance() {
         self.backgroundColor = SpaceAppColor.background
     }
     
-    //MARK: - Setup Layout
-    
-    private func setupLayout() {
+    func setupLayout() {
         verticalStack.snp.makeConstraints { make in
             make.top.equalTo(snp.topMargin).offset(40)
             make.horizontalEdges.equalToSuperview().inset(20)
         }
     }
-    
-    //MARK: - Creating SegmentedControl
     
     func createLabels(name: String) -> UILabel {
         let label = UILabel()
@@ -89,7 +88,6 @@ private extension RocketSettingsView {
         stackView.distribution = distribution
         return stackView
     }
-
     
     func createSegmentedControl(typeOfMeasurement: TypeOfMeasurement) -> UISegmentedControl {
         let items: [String]

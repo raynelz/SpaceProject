@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		85B1CCD22C787FFA004B68E9 /* RocketSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B1CCD12C787FFA004B68E9 /* RocketSettingsView.swift */; };
-		85B1CCD42C78E47B004B68E9 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B1CCD32C78E47B004B68E9 /* Test.swift */; };
 		85B3AF9F2C779394000460BD /* RocketSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B3AF9E2C779394000460BD /* RocketSettings.swift */; };
 		85B3AFA32C7793C8000460BD /* RocketSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B3AFA22C7793C8000460BD /* RocketSettingsViewController.swift */; };
 		C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E446E2C773E4B0027A4C9 /* Colors.swift */; };
@@ -25,7 +24,6 @@
 
 /* Begin PBXFileReference section */
 		85B1CCD12C787FFA004B68E9 /* RocketSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketSettingsView.swift; sourceTree = "<group>"; };
-		85B1CCD32C78E47B004B68E9 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		85B3AF9E2C779394000460BD /* RocketSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RocketSettings.swift; path = SpaceProject/Modules/Main/Model/RocketSettings.swift; sourceTree = SOURCE_ROOT; };
 		85B3AFA22C7793C8000460BD /* RocketSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketSettingsViewController.swift; sourceTree = "<group>"; };
 		C98E446E2C773E4B0027A4C9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 			children = (
 				EC4EDD5F2C67A3310064134D /* MainViewController.swift */,
 				85B3AFA22C7793C8000460BD /* RocketSettingsViewController.swift */,
-				85B1CCD32C78E47B004B68E9 /* Test.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -243,7 +240,6 @@
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				85B1CCD22C787FFA004B68E9 /* RocketSettingsView.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
-				85B1CCD42C78E47B004B68E9 /* Test.swift in Sources */,
 				C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
