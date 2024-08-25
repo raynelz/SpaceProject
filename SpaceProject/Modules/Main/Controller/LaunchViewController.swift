@@ -10,20 +10,21 @@ final class LaunchViewController: GenericViewController<LaunchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setupTableView()
+        setupBehavior()
     }
 }
 
 private extension LaunchViewController {
     // MARK: - Private Methods
-    private func setupNavigationBar() {
-        self.title = "Falcon Heavy"
-        self.navigationController?.navigationBar.isTranslucent = true
+    func setupNavigationBar() {
+        title = "Falcon Heavy"
+        navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.barTintColor = SpaceAppColor.background
-        self.navigationController?.navigationBar.titleTextAttributes = [
+        navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: SpaceAppColor.textSecondary!
         ]
-        self.navigationController?.navigationBar.tintColor = SpaceAppColor.background
+        navigationController?.navigationBar.tintColor = SpaceAppColor.background
+        
         let leftButton = UIBarButtonItem (
             title: "Назад",
             style: .plain,
@@ -32,12 +33,14 @@ private extension LaunchViewController {
             
         )
         leftButton.tintColor = SpaceAppColor.textSecondary
-        self.navigationItem.leftBarButtonItem = leftButton
+        navigationItem.leftBarButtonItem = leftButton
     }
+    
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    private func setupTableView() {
+    
+    func setupBehavior() {
         rootView.tableView.register(LaunchViewCell.self, forCellReuseIdentifier: "LaunchCell")
         rootView.tableView.dataSource = self
         rootView.tableView.delegate = self
@@ -57,7 +60,7 @@ extension LaunchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchCell", for: indexPath)
                 as? LaunchViewCell else {
-            fatalError("Ячейка не найдена")
+            return UITableViewCell()
         }
         
         let launch = launches[indexPath.section]

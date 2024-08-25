@@ -12,9 +12,9 @@
 		85670DBD2C732BFC006661E6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBC2C732BFC006661E6 /* LaunchViewController.swift */; };
 		85670DBF2C745B08006661E6 /* LaunchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85670DBE2C745B08006661E6 /* LaunchViewCell.swift */; };
 		85B3AFA62C784284000460BD /* LauchMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B3AFA52C784284000460BD /* LauchMock.swift */; };
+		85E8258C2C7ADE9200C64BC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E8258B2C7ADE9200C64BC2 /* SceneDelegate.swift */; };
 		C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E446E2C773E4B0027A4C9 /* Colors.swift */; };
 		EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD352C679C430064134D /* AppDelegate.swift */; };
-		EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4EDD372C679C430064134D /* SceneDelegate.swift */; };
 		EC4EDD3F2C679C440064134D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD3E2C679C440064134D /* Assets.xcassets */; };
 		EC4EDD422C679C440064134D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EC4EDD412C679C440064134D /* Base */; };
 		EC4EDD4B2C679CAB0064134D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC4EDD4A2C679CAB0064134D /* SnapKit */; };
@@ -30,10 +30,10 @@
 		85670DBC2C732BFC006661E6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		85670DBE2C745B08006661E6 /* LaunchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewCell.swift; sourceTree = "<group>"; };
 		85B3AFA52C784284000460BD /* LauchMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauchMock.swift; sourceTree = "<group>"; };
+		85E8258B2C7ADE9200C64BC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = ../../../../../Desktop/SceneDelegate.swift; sourceTree = "<group>"; };
 		C98E446E2C773E4B0027A4C9 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		EC4EDD322C679C430064134D /* SpaceProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4EDD352C679C430064134D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC4EDD372C679C430064134D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EC4EDD3E2C679C440064134D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC4EDD412C679C440064134D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC4EDD432C679C440064134D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				EC4EDD352C679C430064134D /* AppDelegate.swift */,
-				EC4EDD372C679C430064134D /* SceneDelegate.swift */,
+				85E8258B2C7ADE9200C64BC2 /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -183,7 +183,6 @@
 				EC4EDD2E2C679C430064134D /* Sources */,
 				EC4EDD2F2C679C430064134D /* Frameworks */,
 				EC4EDD302C679C430064134D /* Resources */,
-				EC4EDD5C2C67A2B60064134D /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -245,28 +244,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		EC4EDD5C2C67A2B60064134D /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		EC4EDD2E2C679C430064134D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -280,10 +257,10 @@
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
 				C98E446F2C773E4B0027A4C9 /* Colors.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
+				85E8258C2C7ADE9200C64BC2 /* SceneDelegate.swift in Sources */,
 				85670DB92C7328B0006661E6 /* Launch.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
 				85670DBD2C732BFC006661E6 /* LaunchViewController.swift in Sources */,
-				EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

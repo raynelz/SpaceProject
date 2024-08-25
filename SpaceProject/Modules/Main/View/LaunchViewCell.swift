@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class LaunchViewCell: UITableViewCell {
+    
     // MARK: - UI Components
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -27,6 +28,7 @@ final class LaunchViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,6 +39,7 @@ final class LaunchViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Configuration
     func configure(model: Launch) {
         nameLabel.text = model.name
@@ -49,10 +52,12 @@ final class LaunchViewCell: UITableViewCell {
 // MARK: - Private Methods
 
 private extension LaunchViewCell {
+    
     // MARK: - Setup Views
     func setupViews() {
         contentView.addSubviews(nameLabel, dateLabel, iconImageView)
     }
+    
     // MARK: - Setup Appearance
     func setupCellAppearance() {
         backgroundColor = .clear
@@ -65,6 +70,7 @@ private extension LaunchViewCell {
         self.selectedBackgroundView = selectedBackgroundColor
         self.selectedBackgroundView?.layer.cornerRadius = 20
     }
+    
     // MARK: - Setup Layout
     func setupLayout() {
         nameLabel.snp.makeConstraints { make in
