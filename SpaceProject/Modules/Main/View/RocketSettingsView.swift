@@ -118,5 +118,3 @@ private extension RocketSettingsView {
         return segmentControl
     }
 }
-
-}
