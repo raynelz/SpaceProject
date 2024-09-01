@@ -23,7 +23,6 @@ final class MainView: UIView {
 		setupAppearance()
 		setupLayout()
         setupCollectionViewLayout()
-		setupData()
 	}
 
 	@available(*, unavailable)
