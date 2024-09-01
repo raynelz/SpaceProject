@@ -69,7 +69,7 @@ private extension RocketCollectionFooterView {
     @objc
     func navigateToLaunches() {
         launchesNavigationButton.animateTap()
-        
-        // Push launches view controller
+        guard let viewController = viewController else { return }
+        viewController.navigationController?.pushViewController(LaunchViewController(), animated: true)
     }
 }
