@@ -38,7 +38,7 @@ private extension RocketSettingsViewController {
         let rightButton = UIBarButtonItem(
             title: "Закрыть",
             style: .done,
-            target: nil,
+            target: self,
             action: #selector(closeButtonTapped)
         )
         
@@ -46,11 +46,7 @@ private extension RocketSettingsViewController {
         navigationItem.rightBarButtonItem = rightButton
     }
     
-    
     @objc private func closeButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    func setupSegmentedControls() {
+        navigationController?.dismiss(animated: true)
     }
 }

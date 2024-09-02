@@ -85,7 +85,12 @@ private extension RocketCollectionHeaderView {
     @objc
     func navigateToSettings() {
         settingsButton.animateTap()
-        
-        // Open settings bottom sheet
+        guard let viewController = viewController else { return }
+        let sheetViewController = RocketSettingsViewController()
+        let navigationController = UINavigationController(rootViewController: sheetViewController)
+        if let sheet = navigationController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+        viewController.present(navigationController, animated: true)
     }
 }
