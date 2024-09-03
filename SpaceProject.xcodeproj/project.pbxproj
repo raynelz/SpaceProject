@@ -15,6 +15,8 @@
 		85170FF42C8309ED00351291 /* RocketSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF32C8309ED00351291 /* RocketSettingsViewController.swift */; };
 		85170FF62C8309FE00351291 /* RocketSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF52C8309FE00351291 /* RocketSettingsModel.swift */; };
 		85170FF82C830A1600351291 /* RocketSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF72C830A1600351291 /* RocketSettingsView.swift */; };
+		8560A1322C86C8890074BD48 /* LaunchesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A1312C86C8890074BD48 /* LaunchesResponse.swift */; };
+		8560A1342C86CDDC0074BD48 /* RocketSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A1332C86CDDC0074BD48 /* RocketSettingsResponse.swift */; };
 		C9625B7F2C79227A00848AC0 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9625B7E2C79227A00848AC0 /* MockData.swift */; };
 		C98E44712C77406D0027A4C9 /* RocketCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */; };
 		C9C118402C70F26000F305FE /* RocketCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1183F2C70F26000F305FE /* RocketCollectionHeaderView.swift */; };
@@ -42,6 +44,8 @@
 		85170FF32C8309ED00351291 /* RocketSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsViewController.swift; sourceTree = "<group>"; };
 		85170FF52C8309FE00351291 /* RocketSettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsModel.swift; sourceTree = "<group>"; };
 		85170FF72C830A1600351291 /* RocketSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsView.swift; sourceTree = "<group>"; };
+		8560A1312C86C8890074BD48 /* LaunchesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesResponse.swift; sourceTree = "<group>"; };
+		8560A1332C86CDDC0074BD48 /* RocketSettingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketSettingsResponse.swift; sourceTree = "<group>"; };
 		C9625B7E2C79227A00848AC0 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketCollectionModel.swift; sourceTree = "<group>"; };
 		C9C1183F2C70F26000F305FE /* RocketCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 			children = (
 				85170FF12C80DC5600351291 /* LauchMock.swift */,
 				85170FF52C8309FE00351291 /* RocketSettingsModel.swift */,
+				8560A1332C86CDDC0074BD48 /* RocketSettingsResponse.swift */,
+				8560A1312C86C8890074BD48 /* LaunchesResponse.swift */,
 				85170FE92C80D7E500351291 /* LaunchModel.swift */,
 				C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */,
 				C9625B7E2C79227A00848AC0 /* MockData.swift */,
@@ -269,12 +275,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
+				8560A1322C86C8890074BD48 /* LaunchesResponse.swift in Sources */,
 				85170FEC2C80D85A00351291 /* LaunchViewController.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				85170FEA2C80D7E500351291 /* LaunchModel.swift in Sources */,
 				85170FF42C8309ED00351291 /* RocketSettingsViewController.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
 				85170FF02C80D87200351291 /* LaunchView.swift in Sources */,
+				8560A1342C86CDDC0074BD48 /* RocketSettingsResponse.swift in Sources */,
 				85170FEF2C80D87200351291 /* LaunchViewCell.swift in Sources */,
 				85170FF62C8309FE00351291 /* RocketSettingsModel.swift in Sources */,
 				C9625B7F2C79227A00848AC0 /* MockData.swift in Sources */,
