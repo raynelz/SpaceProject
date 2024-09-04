@@ -8,13 +8,37 @@
 import UIKit
 import SnapKit
 
-/// FooterView коллекции ракеты
+/// Протокол `RocketCollectionFooterViewDelegate` определяет метод для обработки нажатия на кнопку в футере.
+///
+/// Реализуйте этот протокол в вашем `ViewController`, чтобы обрабатывать события, связанные с нажатием
+/// на кнопку "Посмотреть запуски" в футере.
+protocol RocketCollectionFooterViewDelegate: AnyObject {
+    /// Метод вызывается при нажатии на кнопку "Посмотреть запуски".
+    func didTapLaunchesButton()
+}
+
+// RocketCollectionFooterView.swift
+
+import UIKit
+import SnapKit
+
+/// Вью футера для коллекции ракеты.
+///
+/// Включает кнопку, которая позволяет пользователю перейти к экрану запусков.
+/// Передает события через делегат RocketCollectionFooterViewDelegate.
 final class RocketCollectionFooterView: UICollectionReusableView {
+    
+    /// Идентификатор для повторного использования футера в коллекции.
     static let identifier = "RocketCollectionFooterView"
     
-    /// Для установки Parent View Controller для того чтобы дергать Navigation Controller
-    weak var viewController: UIViewController?
+    /// Делегат для обработки нажатия кнопки "Посмотреть запуски".
+    ///
+    /// Используется для передачи события нажатия на кнопку в родительский контроллер.
+    weak var delegate: RocketCollectionFooterViewDelegate?
     
+    /// Для установки родительского контроллера (View Controller) для того чтобы дергать `NavigationController`.
+    weak var viewController: UIViewController?
+
     // MARK: - UI Components
     private let launchesNavigationButton = UIButton()
     
@@ -63,13 +87,12 @@ private extension RocketCollectionFooterView {
     // MARK: - Setup Behavior
     
     func setupBehavior() {
-        launchesNavigationButton.addTarget(self, action: #selector(navigateToLaunches), for: .touchUpInside)
+        launchesNavigationButton.addTarget(self, action: #selector(launchesButtonTapped), for: .touchUpInside)
     }
     
     @objc
-    func navigateToLaunches() {
+    func launchesButtonTapped() {
         launchesNavigationButton.animateTap()
-        guard let viewController = viewController else { return }
-        viewController.navigationController?.pushViewController(LaunchViewController(), animated: true)
+        delegate?.didTapLaunchesButton()
     }
 }

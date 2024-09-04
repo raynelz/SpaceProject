@@ -101,6 +101,7 @@ private extension MainViewController {
             elementKind: RocketCollectionFooterView.identifier
         ) { supplementaryView, _, _ in
             supplementaryView.viewController = self
+            supplementaryView.delegate = self
         }
         
         let sectionNameRegistration = UICollectionView.SupplementaryRegistration<UICollectionReusableView>(
@@ -144,6 +145,7 @@ private extension MainViewController {
             }
         }
     }
+
     
     // MARK: Setup data
     
@@ -158,5 +160,18 @@ private extension MainViewController {
             snapshot.appendItems([$0], toSection: section)
         }
         rocketDataSource?.apply(snapshot)
+    }
+}
+
+/// Расширение для обработки событий нажатия кнопки в RocketCollectionFooterView
+extension MainViewController: RocketCollectionFooterViewDelegate {
+    
+    /// Метод вызывается, когда пользователь нажимает на кнопку "Посмотреть запуски"
+    ///
+    /// Этот метод реализует делегат `RocketCollectionFooterViewDelegate` и отвечает за
+    /// навигацию к `LaunchViewController`, когда пользователь нажимает кнопку.
+    func didTapLaunchesButton() {
+        let launchViewController = LaunchViewController()
+        navigationController?.pushViewController(launchViewController, animated: true)
     }
 }
