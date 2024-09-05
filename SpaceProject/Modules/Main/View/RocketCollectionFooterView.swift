@@ -10,7 +10,6 @@ import SnapKit
 
 /// Протокол для делегирования событий из RocketCollectionFooterView.
 protocol RocketCollectionFooterViewDelegate: AnyObject {
-    
     /// Уведомляет делегата о том, что кнопка в футере коллекции была нажата.
     func didTapLaunchButton()
 }

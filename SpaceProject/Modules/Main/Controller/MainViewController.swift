@@ -187,7 +187,8 @@ extension MainViewController: RocketCollectionHeaderViewDelegate {
 
     /// Метод, вызываемый при нажатии кнопки настроек в хедере коллекции.
     ///
-    /// Открывает окно настроек в формате `sheet presentation` с возможностью выбора между средним и большим представлением.
+    /// Открывает окно настроек в формате `sheet presentation` 
+    /// с возможностью выбора между средним и большим представлением.
     func didTapSettingsButton() {
         let sheetViewController = RocketSettingsViewController()
         let navigationController = UINavigationController(rootViewController: sheetViewController)
