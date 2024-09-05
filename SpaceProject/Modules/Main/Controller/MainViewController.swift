@@ -94,14 +94,12 @@ private extension MainViewController {
         let headerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionHeaderView>(
             elementKind: RocketCollectionHeaderView.identifier
         ) { supplementaryView, _, _ in
-            supplementaryView.viewController = self
             supplementaryView.delegate = self
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionFooterView>(
             elementKind: RocketCollectionFooterView.identifier
         ) { supplementaryView, _, _ in
-            supplementaryView.viewController = self
             supplementaryView.delegate = self
         }
         
