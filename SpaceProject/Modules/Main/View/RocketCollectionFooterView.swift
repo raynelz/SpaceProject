@@ -8,19 +8,12 @@
 import UIKit
 import SnapKit
 
-/// Протокол `RocketCollectionFooterViewDelegate` определяет метод для обработки нажатия на кнопку в футере.
-///
-/// Реализуйте этот протокол в вашем `ViewController`, чтобы обрабатывать события, связанные с нажатием
-/// на кнопку "Посмотреть запуски" в футере.
+/// Протокол для делегирования событий из RocketCollectionFooterView.
 protocol RocketCollectionFooterViewDelegate: AnyObject {
-    /// Метод вызывается при нажатии на кнопку "Посмотреть запуски".
-    func didTapLaunchesButton()
+    
+    /// Уведомляет делегата о том, что кнопка в футере коллекции была нажата.
+    func didTapLaunchButton()
 }
-
-// RocketCollectionFooterView.swift
-
-import UIKit
-import SnapKit
 
 /// Вью футера для коллекции ракеты.
 ///
@@ -32,8 +25,6 @@ final class RocketCollectionFooterView: UICollectionReusableView {
     static let identifier = "RocketCollectionFooterView"
     
     /// Делегат для обработки нажатия кнопки "Посмотреть запуски".
-    ///
-    /// Используется для передачи события нажатия на кнопку в родительский контроллер.
     weak var delegate: RocketCollectionFooterViewDelegate?
     
     /// Для установки родительского контроллера (View Controller) для того чтобы дергать `NavigationController`.
@@ -93,6 +84,6 @@ private extension RocketCollectionFooterView {
     @objc
     func launchesButtonTapped() {
         launchesNavigationButton.animateTap()
-        delegate?.didTapLaunchesButton()
+        delegate?.didTapLaunchButton()
     }
 }

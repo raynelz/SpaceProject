@@ -95,6 +95,7 @@ private extension MainViewController {
             elementKind: RocketCollectionHeaderView.identifier
         ) { supplementaryView, _, _ in
             supplementaryView.viewController = self
+            supplementaryView.delegate = self
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionFooterView>(
@@ -164,14 +165,35 @@ private extension MainViewController {
 }
 
 /// Расширение для обработки событий нажатия кнопки в RocketCollectionFooterView
+///
+/// Реализует протокол `RocketCollectionFooterViewDelegate`, который отвечает за реакцию на нажатие кнопки
+/// в футере коллекции. Делегат вызывает метод `didTapLaunchButton`, который инициирует переход на экран с запусками.
 extension MainViewController: RocketCollectionFooterViewDelegate {
-    
-    /// Метод вызывается, когда пользователь нажимает на кнопку "Посмотреть запуски"
+
+    /// Метод, вызываемый при нажатии кнопки в футере коллекции ракет.
     ///
-    /// Этот метод реализует делегат `RocketCollectionFooterViewDelegate` и отвечает за
-    /// навигацию к `LaunchViewController`, когда пользователь нажимает кнопку.
-    func didTapLaunchesButton() {
-        let launchViewController = LaunchViewController()
-        navigationController?.pushViewController(launchViewController, animated: true)
+    /// Открывает экран с информацией о запусках.
+    func didTapLaunchButton() {
+        let launchesVC = LaunchViewController()
+        navigationController?.pushViewController(launchesVC, animated: true)
+    }
+}
+
+/// Расширение для обработки событий нажатия кнопки в RocketCollectionHeaderView
+///
+/// Реализует протокол `RocketCollectionHeaderViewDelegate`, который отвечает за реакцию на нажатие кнопки
+/// в хедере коллекции. Делегат вызывает метод `didTapSettingsButton`, который открывает окно настроек.
+extension MainViewController: RocketCollectionHeaderViewDelegate {
+
+    /// Метод, вызываемый при нажатии кнопки настроек в хедере коллекции.
+    ///
+    /// Открывает окно настроек в формате `sheet presentation` с возможностью выбора между средним и большим представлением.
+    func didTapSettingsButton() {
+        let sheetViewController = RocketSettingsViewController()
+        let navigationController = UINavigationController(rootViewController: sheetViewController)
+        if let sheet = navigationController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+        present(navigationController, animated: true)
     }
 }
