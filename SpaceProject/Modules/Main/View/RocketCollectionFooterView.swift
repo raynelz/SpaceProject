@@ -25,9 +25,6 @@ final class RocketCollectionFooterView: UICollectionReusableView {
     
     /// Делегат для обработки нажатия кнопки "Посмотреть запуски".
     weak var delegate: RocketCollectionFooterViewDelegate?
-    
-    /// Для установки родительского контроллера (View Controller) для того чтобы дергать `NavigationController`.
-    weak var viewController: UIViewController?
 
     // MARK: - UI Components
     private let launchesNavigationButton = UIButton()
