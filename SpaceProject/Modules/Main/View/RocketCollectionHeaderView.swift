@@ -25,9 +25,6 @@ final class RocketCollectionHeaderView: UICollectionReusableView {
     
     /// Делегат, который будет уведомлён о нажатии кнопки настроек.
     weak var delegate: RocketCollectionHeaderViewDelegate?
-
-    /// Для установки Parent View Controller для того чтобы дергать Navigation Controller
-    weak var viewController: UIViewController?
     
     // MARK: - UI Components
     private let rocketNameLabel = UILabel()
