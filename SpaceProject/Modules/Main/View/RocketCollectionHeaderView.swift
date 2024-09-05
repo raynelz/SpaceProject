@@ -8,10 +8,8 @@
 import UIKit
 import SnapKit
 
-
 /// Протокол для делегирования событий из RocketCollectionHeaderView.
 protocol RocketCollectionHeaderViewDelegate: AnyObject {
-    
     /// Уведомляет делегата о том, что кнопка настроек в хедере коллекции была нажата.
     func didTapSettingsButton()
 }
@@ -22,7 +20,6 @@ protocol RocketCollectionHeaderViewDelegate: AnyObject {
 /// который отображается в верхней части секций коллекции. Он содержит кнопку настроек,
 /// нажатие на которую уведомляет делегата через протокол `RocketCollectionHeaderViewDelegate`.
 final class RocketCollectionHeaderView: UICollectionReusableView {
-    
     /// Идентификатор для регистрации и повторного использования `RocketCollectionHeaderView` в коллекции.
     static let identifier = "RocketCollectionHeaderView"
     
