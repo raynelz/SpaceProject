@@ -8,12 +8,23 @@
 import UIKit
 import SnapKit
 
-/// HeaderView коллекции ракеты
+/// Протокол для делегирования событий из RocketCollectionHeaderView.
+protocol RocketCollectionHeaderViewDelegate: AnyObject {
+    /// Уведомляет делегата о том, что кнопка настроек в хедере коллекции была нажата.
+    func didTapSettingsButton()
+}
+
+/// HeaderView коллекции ракеты.
+///
+/// `RocketCollectionHeaderView` — это дополнительный элемент коллекции (header),
+/// который отображается в верхней части секций коллекции. Он содержит кнопку настроек,
+/// нажатие на которую уведомляет делегата через протокол `RocketCollectionHeaderViewDelegate`.
 final class RocketCollectionHeaderView: UICollectionReusableView {
+    /// Идентификатор для регистрации и повторного использования `RocketCollectionHeaderView` в коллекции.
     static let identifier = "RocketCollectionHeaderView"
     
-    /// Для установки Parent View Controller для того чтобы дергать Navigation Controller
-    weak var viewController: UIViewController?
+    /// Делегат, который будет уведомлён о нажатии кнопки настроек.
+    weak var delegate: RocketCollectionHeaderViewDelegate?
     
     // MARK: - UI Components
     private let rocketNameLabel = UILabel()
@@ -85,12 +96,6 @@ private extension RocketCollectionHeaderView {
     @objc
     func navigateToSettings() {
         settingsButton.animateTap()
-        guard let viewController = viewController else { return }
-        let sheetViewController = RocketSettingsViewController()
-        let navigationController = UINavigationController(rootViewController: sheetViewController)
-        if let sheet = navigationController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-        }
-        viewController.present(navigationController, animated: true)
+        delegate?.didTapSettingsButton()
     }
 }

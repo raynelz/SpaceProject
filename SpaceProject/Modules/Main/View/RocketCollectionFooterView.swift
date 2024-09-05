@@ -8,13 +8,24 @@
 import UIKit
 import SnapKit
 
-/// FooterView коллекции ракеты
+/// Протокол для делегирования событий из RocketCollectionFooterView.
+protocol RocketCollectionFooterViewDelegate: AnyObject {
+    /// Уведомляет делегата о том, что кнопка в футере коллекции была нажата.
+    func didTapLaunchButton()
+}
+
+/// Вью футера для коллекции ракеты.
+///
+/// Включает кнопку, которая позволяет пользователю перейти к экрану запусков.
+/// Передает события через делегат RocketCollectionFooterViewDelegate.
 final class RocketCollectionFooterView: UICollectionReusableView {
+    
+    /// Идентификатор для повторного использования футера в коллекции.
     static let identifier = "RocketCollectionFooterView"
     
-    /// Для установки Parent View Controller для того чтобы дергать Navigation Controller
-    weak var viewController: UIViewController?
-    
+    /// Делегат для обработки нажатия кнопки "Посмотреть запуски".
+    weak var delegate: RocketCollectionFooterViewDelegate?
+
     // MARK: - UI Components
     private let launchesNavigationButton = UIButton()
     
@@ -63,13 +74,12 @@ private extension RocketCollectionFooterView {
     // MARK: - Setup Behavior
     
     func setupBehavior() {
-        launchesNavigationButton.addTarget(self, action: #selector(navigateToLaunches), for: .touchUpInside)
+        launchesNavigationButton.addTarget(self, action: #selector(launchesButtonTapped), for: .touchUpInside)
     }
     
     @objc
-    func navigateToLaunches() {
+    func launchesButtonTapped() {
         launchesNavigationButton.animateTap()
-        
-        // Push launches view controller
+        delegate?.didTapLaunchButton()
     }
 }
