@@ -12,7 +12,6 @@ enum RocketEndpoint: Endpoint {
     /// Запрос для получения информации о ракетах
     /// - Parameter json: Данные для запроса в формате JSON
     case rockets(json: JSON)
-    
     /// Возвращает путь для запроса в API
     var path: String {
         switch self {
@@ -20,7 +19,6 @@ enum RocketEndpoint: Endpoint {
             return API.Endpoints.rockets
         }
     }
-    
     /// Возвращает HTTP-метод для запроса (GET, POST и т.д.)
     var method: RequestMethod {
         switch self {
@@ -28,12 +26,10 @@ enum RocketEndpoint: Endpoint {
             return .get
         }
     }
-    
     /// Возвращает заголовки для запроса (если есть)
     var header: [String: String]? {
         return nil
     }
-    
     /// Возвращает параметры для запроса (если есть)
     var parameters: JSON? {
         switch self {
