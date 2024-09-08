@@ -9,7 +9,6 @@ import Foundation
 
 /// Определяет конечные точки API для работы с ракетами
 enum RocketEndpoint: Endpoint {
-
     /// Запрос для получения информации о ракетах
     /// - Parameter json: Данные для запроса в формате JSON
     case rockets(json: JSON)
