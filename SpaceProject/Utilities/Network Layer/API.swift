@@ -11,7 +11,6 @@ import Foundation
 enum API {
     /// Базовый URL
     static let baseURL: String = "https://api.spacexdata.com/v4/"
-    
     /// Конечные точки API, доступные для запросов
     enum Endpoints {
         /// Конечная точка для получения информации о ракетах

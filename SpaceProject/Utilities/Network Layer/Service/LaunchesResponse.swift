@@ -20,7 +20,7 @@ final class LaunchesService: Request, LaunchesServiceProtocol {
     /// Получает список запусков ракет
     func getLaunches(json: JSON) async throws -> LaunchesResponse {
         return try await sendRequest(
-            endpoint: RocketEndpoint.rockets(json: json),
+            endpoint: LaunchEndpoint.launches(json: json),
             responseModel: LaunchesResponse.self
         )
     }
