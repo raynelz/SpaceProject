@@ -5,6 +5,28 @@
 //  Created by Станислав Никулин on 03.09.2024.
 //
 
+/// Протокол сервиса для получения настроек ракеты
+protocol RocketSettingsServiceProtocol {
+
+    /// Получает настройки ракеты
+    /// - Parameter json: данные в формате JSON для запроса
+    /// - Returns: ответ от сервера с настройками ракеты
+    func getRocketSettings(json: JSON) async throws -> RocketSettingsResponse
+}
+
+/// Реализация сервиса для получения настроек ракеты
+final class RocketSettingsService: Request, RocketSettingsServiceProtocol {
+    
+    /// Получает настройки ракеты
+    func getRocketSettings(json: JSON) async throws -> RocketSettingsResponse {
+        return try await sendRequest(
+            endpoint: RocketEndpoint.rockets(json: json),
+            responseModel: RocketSettingsResponse.self
+        )
+    }
+}
+
+
 /// Модель ответа API для отображения настроек ракеты в MainView.
 struct RocketSettingsResponse: Decodable {
     /// Название ракеты.
