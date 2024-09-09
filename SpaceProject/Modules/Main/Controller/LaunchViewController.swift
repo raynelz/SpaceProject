@@ -3,7 +3,7 @@ import UIKit
 final class LaunchViewController: GenericViewController<LaunchView> {
     // MARK: - Properties
     
-    private let launches = LaunchMockTest.launches
+    private var launches: [LaunchesResponse] = []
     
     // MARK: - Life Cycle
     
@@ -11,6 +11,14 @@ final class LaunchViewController: GenericViewController<LaunchView> {
         super.viewDidLoad()
         setupNavigationBar()
         setupBehavior()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        Task {
+            await fetchData()
+        }
     }
 }
 
@@ -45,6 +53,19 @@ private extension LaunchViewController {
         rootView.tableView.dataSource = self
         rootView.tableView.delegate = self
         rootView.tableView.reloadData()
+    }
+    func fetchData() async {
+        let launchesService = LaunchesService()
+        let json: [String: Any] = [:]
+        do {
+            let decodedData = try await launchesService.getLaunches(json: json)
+            DispatchQueue.main.async {
+                    self.launches = decodedData
+                self.rootView.tableView.reloadData()
+            }
+        } catch {
+            print("Функция упала: \(error.localizedDescription)")
+        }
     }
 }
 // MARK: - UITableViewDataSource
@@ -85,3 +106,4 @@ extension LaunchViewController: UITableViewDelegate {
         return footerView
     }
 }
+
