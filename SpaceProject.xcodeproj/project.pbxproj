@@ -15,6 +15,16 @@
 		85170FF42C8309ED00351291 /* RocketSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF32C8309ED00351291 /* RocketSettingsViewController.swift */; };
 		85170FF62C8309FE00351291 /* RocketSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF52C8309FE00351291 /* RocketSettingsModel.swift */; };
 		85170FF82C830A1600351291 /* RocketSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF72C830A1600351291 /* RocketSettingsView.swift */; };
+		851ECC542C8DF86B00EF081D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851ECC532C8DF86B00EF081D /* Request.swift */; };
+		851ECC562C8DF89D00EF081D /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851ECC552C8DF89D00EF081D /* RequestError.swift */; };
+		851ECC582C8DF8BF00EF081D /* RequestEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851ECC572C8DF8BF00EF081D /* RequestEncoder.swift */; };
+		853F0FAE2C8C514C00624773 /* LaunchEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F0FAD2C8C514C00624773 /* LaunchEndpoint.swift */; };
+		8560A1322C86C8890074BD48 /* LaunchesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A1312C86C8890074BD48 /* LaunchesResponse.swift */; };
+		8560A1342C86CDDC0074BD48 /* RocketSettingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560A1332C86CDDC0074BD48 /* RocketSettingsResponse.swift */; };
+		857D48F92C8C289200C7A31F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D48F82C8C289200C7A31F /* API.swift */; };
+		857D48FB2C8C4AA200C7A31F /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D48FA2C8C4AA200C7A31F /* Endpoint.swift */; };
+		857D48FE2C8C4B4200C7A31F /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D48FD2C8C4B4200C7A31F /* RequestMethod.swift */; };
+		857D49002C8C4BCD00C7A31F /* RocketEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D48FF2C8C4BCD00C7A31F /* RocketEndpoint.swift */; };
 		C9625B7F2C79227A00848AC0 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9625B7E2C79227A00848AC0 /* MockData.swift */; };
 		C98E44712C77406D0027A4C9 /* RocketCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */; };
 		C9C118402C70F26000F305FE /* RocketCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1183F2C70F26000F305FE /* RocketCollectionHeaderView.swift */; };
@@ -42,6 +52,16 @@
 		85170FF32C8309ED00351291 /* RocketSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsViewController.swift; sourceTree = "<group>"; };
 		85170FF52C8309FE00351291 /* RocketSettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsModel.swift; sourceTree = "<group>"; };
 		85170FF72C830A1600351291 /* RocketSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsView.swift; sourceTree = "<group>"; };
+		851ECC532C8DF86B00EF081D /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		851ECC552C8DF89D00EF081D /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		851ECC572C8DF8BF00EF081D /* RequestEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEncoder.swift; sourceTree = "<group>"; };
+		853F0FAD2C8C514C00624773 /* LaunchEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchEndpoint.swift; sourceTree = "<group>"; };
+		8560A1312C86C8890074BD48 /* LaunchesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesResponse.swift; sourceTree = "<group>"; };
+		8560A1332C86CDDC0074BD48 /* RocketSettingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketSettingsResponse.swift; sourceTree = "<group>"; };
+		857D48F82C8C289200C7A31F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		857D48FA2C8C4AA200C7A31F /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		857D48FD2C8C4B4200C7A31F /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
+		857D48FF2C8C4BCD00C7A31F /* RocketEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketEndpoint.swift; sourceTree = "<group>"; };
 		C9625B7E2C79227A00848AC0 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketCollectionModel.swift; sourceTree = "<group>"; };
 		C9C1183F2C70F26000F305FE /* RocketCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -73,6 +93,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		857D48F22C8C1D8C00C7A31F /* Network Layer */ = {
+			isa = PBXGroup;
+			children = (
+				857D48F82C8C289200C7A31F /* API.swift */,
+				857D48F42C8C1DC100C7A31F /* Service */,
+				857D48F52C8C1DC800C7A31F /* Endpoint */,
+				857D48F32C8C1DAD00C7A31F /* Request */,
+			);
+			path = "Network Layer";
+			sourceTree = "<group>";
+		};
+		857D48F32C8C1DAD00C7A31F /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				857D48FD2C8C4B4200C7A31F /* RequestMethod.swift */,
+				851ECC532C8DF86B00EF081D /* Request.swift */,
+				851ECC552C8DF89D00EF081D /* RequestError.swift */,
+				851ECC572C8DF8BF00EF081D /* RequestEncoder.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		857D48F42C8C1DC100C7A31F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8560A1332C86CDDC0074BD48 /* RocketSettingsResponse.swift */,
+				8560A1312C86C8890074BD48 /* LaunchesResponse.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		857D48F52C8C1DC800C7A31F /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				857D48FA2C8C4AA200C7A31F /* Endpoint.swift */,
+				857D48FF2C8C4BCD00C7A31F /* RocketEndpoint.swift */,
+				853F0FAD2C8C514C00624773 /* LaunchEndpoint.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
 		EC4EDD292C679C430064134D = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +248,7 @@
 		EC4EDD5B2C67A1A20064134D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				857D48F22C8C1D8C00C7A31F /* Network Layer */,
 				EC4EDD4D2C679EAC0064134D /* Extensions */,
 			);
 			path = Utilities;
@@ -269,23 +331,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC4EDD602C67A3310064134D /* MainViewController.swift in Sources */,
+				857D49002C8C4BCD00C7A31F /* RocketEndpoint.swift in Sources */,
+				8560A1322C86C8890074BD48 /* LaunchesResponse.swift in Sources */,
 				85170FEC2C80D85A00351291 /* LaunchViewController.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
 				85170FEA2C80D7E500351291 /* LaunchModel.swift in Sources */,
+				851ECC542C8DF86B00EF081D /* Request.swift in Sources */,
+				851ECC582C8DF8BF00EF081D /* RequestEncoder.swift in Sources */,
 				85170FF42C8309ED00351291 /* RocketSettingsViewController.swift in Sources */,
 				EC4EDD552C679FC40064134D /* MainView.swift in Sources */,
 				85170FF02C80D87200351291 /* LaunchView.swift in Sources */,
+				8560A1342C86CDDC0074BD48 /* RocketSettingsResponse.swift in Sources */,
 				85170FEF2C80D87200351291 /* LaunchViewCell.swift in Sources */,
 				85170FF62C8309FE00351291 /* RocketSettingsModel.swift in Sources */,
+				853F0FAE2C8C514C00624773 /* LaunchEndpoint.swift in Sources */,
 				C9625B7F2C79227A00848AC0 /* MockData.swift in Sources */,
 				C9C485782C70949A009B800D /* Colors.swift in Sources */,
 				C9C118422C70F2A300F305FE /* RocketCollectionFooterView.swift in Sources */,
 				EC4EDD522C679F330064134D /* GenericViewController.swift in Sources */,
 				EC4EDD362C679C430064134D /* AppDelegate.swift in Sources */,
+				857D48FE2C8C4B4200C7A31F /* RequestMethod.swift in Sources */,
+				857D48FB2C8C4AA200C7A31F /* Endpoint.swift in Sources */,
 				C9C118402C70F26000F305FE /* RocketCollectionHeaderView.swift in Sources */,
 				85170FF22C80DC5600351291 /* LauchMock.swift in Sources */,
 				EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */,
+				857D48F92C8C289200C7A31F /* API.swift in Sources */,
 				C98E44712C77406D0027A4C9 /* RocketCollectionModel.swift in Sources */,
+				851ECC562C8DF89D00EF081D /* RequestError.swift in Sources */,
 				C9C118442C70F31E00F305FE /* RocketCollectionHorizontalCell.swift in Sources */,
 				85170FF82C830A1600351291 /* RocketSettingsView.swift in Sources */,
 				C9C118462C70F34200F305FE /* RocketCollectionVerticalCell.swift in Sources */,
