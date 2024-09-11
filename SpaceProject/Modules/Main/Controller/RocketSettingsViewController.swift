@@ -49,4 +49,8 @@ private extension RocketSettingsViewController {
     @objc private func closeButtonTapped() {
         navigationController?.dismiss(animated: true)
     }
+    
+    func setupSegmentsBehavior() {
+//        let segments = rootView.getSegmentedControls()
+    }
 }

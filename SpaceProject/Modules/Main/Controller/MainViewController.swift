@@ -18,6 +18,8 @@ final class MainViewController: GenericViewController<MainView> {
         RocketCollectionModel.CellData
     >
     
+    var rockets: [[RocketCollectionModel.CellData]] = []
+    
     private var rocketDataSource: DataSource?
     
 	// MARK: - Life Cycle
@@ -30,8 +32,15 @@ final class MainViewController: GenericViewController<MainView> {
         setupBehavior()
         addFooterHeader()
         
-        setupData(MockData.collectionMockData)
 	}
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Task {
+            await fetchData()
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDelegate {
@@ -47,7 +56,7 @@ extension MainViewController: UICollectionViewDelegate {
 private extension MainViewController {
     // MARK: - Setup Behavior
 
-    private func setupBehavior() {
+    func setupBehavior() {
         rootView.rocketInfoCollectionView.register(
             RocketCollectionVerticalCell.self,
             forCellWithReuseIdentifier: RocketCollectionVerticalCell.identifier
@@ -60,7 +69,7 @@ private extension MainViewController {
     
     // MARK: - Setup Collection DataSource
     
-    private func setupRocketInfoCollectionDataSource() {
+    func setupRocketInfoCollectionDataSource() {
         rocketDataSource = DataSource(
             collectionView: rootView.rocketInfoCollectionView
         ) { _, indexPath, itemData in
@@ -88,9 +97,51 @@ private extension MainViewController {
         }
     }
     
+    func fetchData() async {
+        let rocketSersvice = RocketSettingsService()
+        let json: [String: Any] = [:]
+        do {
+            let decodedData = try await rocketSersvice.getRocketSettings(json: json)
+            DispatchQueue.main.async {
+                self.rockets = self.turnToRocketCollectionModel(decodedData)
+                self.setupData(self.rockets[0])
+            }
+        } catch {
+            print("Функция упала: \(error.localizedDescription)")
+        }
+    }
+    
+    func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
+        var cellDataArray: [[RocketCollectionModel.CellData]] = []
+        for decodedElement in decodedData {
+            var cellData: [RocketCollectionModel.CellData] = [
+                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.height.meters), secondaryText: TypeOfMeasurement.Height.description, unitsOfMeasurement: TypeOfMeasurement.Height.meters),
+                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.diameter.meters), secondaryText: TypeOfMeasurement.Diameter.description, unitsOfMeasurement: TypeOfMeasurement.Diameter.meters),
+                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.mass.kg), secondaryText: TypeOfMeasurement.Weight.description, unitsOfMeasurement: TypeOfMeasurement.Weight.kilograms),
+                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Первый запуск", secondaryText: decodedElement.firstFlight, unitsOfMeasurement: nil),
+                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Страна", secondaryText: decodedElement.country, unitsOfMeasurement: nil),
+                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Стоимость", secondaryText: String(decodedElement.costPerLaunch), unitsOfMeasurement: "$"),
+                RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Количество двигателей",  secondaryText: String(decodedElement.firstStage.engines), unitsOfMeasurement: ""),
+                RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Количество топлива", secondaryText: String(decodedElement.firstStage.fuelAmountTons), unitsOfMeasurement: "ton"),
+                RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Количество двигателей",  secondaryText: String(decodedElement.secondStage.engines), unitsOfMeasurement: ""),
+                RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Количество топлива", secondaryText: String(decodedElement.secondStage.fuelAmountTons), unitsOfMeasurement: "ton")
+            ]
+            if let stageOneBurnTime = decodedElement.firstStage.burnTimeSec {
+                let elem = RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Время сгорания топлива", secondaryText: String(stageOneBurnTime), unitsOfMeasurement: "сек")
+                cellData.append(elem)
+            }
+            if let stageTwoBurnTime = decodedElement.secondStage.burnTimeSec {
+                let elem = RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Время сгорания топлива", secondaryText: String(stageTwoBurnTime), unitsOfMeasurement: "сек")
+                cellData.append(elem)
+            }
+            cellDataArray.append(cellData)
+        }
+        return cellDataArray
+    }
+    
     // MARK: - Add footer and header
     
-    private func addFooterHeader() {
+    func addFooterHeader() {
         let headerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionHeaderView>(
             elementKind: RocketCollectionHeaderView.identifier
         ) { supplementaryView, _, _ in

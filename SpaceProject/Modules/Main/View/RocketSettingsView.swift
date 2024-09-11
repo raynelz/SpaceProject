@@ -6,27 +6,23 @@ final class RocketSettingsView: UIView {
     // MARK: - UI Components
     
     // Элементы горизонтальных стэков сверху вниз
-    private lazy var label1 = createLabels(name: "Высота")
-    private lazy var segment1 = createSegmentedControl(typeOfMeasurement: .height)
+    private lazy var label1 = createLabels(name: TypeOfMeasurement.Height.description)
+    private lazy var segment1 = createSegmentedControl(for: .Height)
     
-    private lazy var label2 = createLabels(name: "Диаметр")
-    private lazy var segment2 = createSegmentedControl(typeOfMeasurement: .height)
+    private lazy var label2 = createLabels(name: TypeOfMeasurement.Diameter.description)
+    private lazy var segment2 = createSegmentedControl(for: .Diameter)
     
-    private lazy var label3 = createLabels(name: "Масса")
-    private lazy var segment3 = createSegmentedControl(typeOfMeasurement: .weight)
-    
-    private lazy var label4 = createLabels(name: "Полезная загрузка")
-    private lazy var segment4 = createSegmentedControl(typeOfMeasurement: .weight)
+    private lazy var label3 = createLabels(name: TypeOfMeasurement.Weight.description)
+    private lazy var segment3 = createSegmentedControl(for: .Weight)
     
     // Горизонтальные стэки
     private lazy var stack1: UIStackView = makeHorizontalStack(elements: [label1, segment1])
     private lazy var stack2: UIStackView = makeHorizontalStack(elements: [label2, segment2])
     private lazy var stack3: UIStackView = makeHorizontalStack(elements: [label3, segment3])
-    private lazy var stack4: UIStackView = makeHorizontalStack(elements: [label4, segment4])
     
     // Вертикальный стэк
     private lazy var verticalStack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [stack1, stack2, stack3, stack4])
+        let stack = UIStackView(arrangedSubviews: [stack1, stack2, stack3])
         stack.axis = .vertical
         stack.spacing = 30
         stack.alignment = .fill
@@ -50,7 +46,7 @@ final class RocketSettingsView: UIView {
     // MARK: - Public Methods
     /// Возвращает массив всех сегментированных контролов на экране
     func getSegmentedControls() -> [UISegmentedControl] {
-        return [segment1, segment2, segment3, segment4]
+        return [segment1, segment2, segment3]
     }
 }
 
@@ -99,16 +95,19 @@ private extension RocketSettingsView {
         return stackView
     }
     
-    // MARK:  Segmented Control Creation
+    // MARK: Segmented Control Creation
     
-    func createSegmentedControl(typeOfMeasurement: TypeOfMeasurement) -> UISegmentedControl {
+    func createSegmentedControl(for measurementType: MeasurementType) -> UISegmentedControl {
         let items: [String]
-        switch typeOfMeasurement {
-        case .height:
-            items = ["m", "ft"]
-        case .weight:
-            items = ["kg", "lb"]
+        switch measurementType {
+        case .Height:
+            items = [TypeOfMeasurement.Height.meters, TypeOfMeasurement.Height.feet]
+        case .Diameter:
+            items = [TypeOfMeasurement.Diameter.meters, TypeOfMeasurement.Diameter.feet]
+        case .Weight:
+            items = [TypeOfMeasurement.Weight.kilograms, TypeOfMeasurement.Weight.pounds]
         }
+        
         let segmentControl = UISegmentedControl(items: items)
         segmentControl.selectedSegmentIndex = 0
         segmentControl.backgroundColor = SpaceAppColor.cellBackground
@@ -119,3 +118,10 @@ private extension RocketSettingsView {
     }
 }
 
+// MARK: - MeasurementType Enum
+/// Перечисление типов измерений для сегментированных контролов
+private enum MeasurementType {
+    case Height
+    case Diameter
+    case Weight
+}

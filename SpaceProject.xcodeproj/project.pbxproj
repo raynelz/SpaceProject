@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85170FEA2C80D7E500351291 /* LaunchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FE92C80D7E500351291 /* LaunchModel.swift */; };
 		85170FEC2C80D85A00351291 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FEB2C80D85A00351291 /* LaunchViewController.swift */; };
 		85170FEF2C80D87200351291 /* LaunchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FED2C80D87200351291 /* LaunchViewCell.swift */; };
 		85170FF02C80D87200351291 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FEE2C80D87200351291 /* LaunchView.swift */; };
-		85170FF22C80DC5600351291 /* LauchMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF12C80DC5600351291 /* LauchMock.swift */; };
 		85170FF42C8309ED00351291 /* RocketSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF32C8309ED00351291 /* RocketSettingsViewController.swift */; };
 		85170FF62C8309FE00351291 /* RocketSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF52C8309FE00351291 /* RocketSettingsModel.swift */; };
 		85170FF82C830A1600351291 /* RocketSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85170FF72C830A1600351291 /* RocketSettingsView.swift */; };
@@ -44,11 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		85170FE92C80D7E500351291 /* LaunchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchModel.swift; sourceTree = "<group>"; };
 		85170FEB2C80D85A00351291 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		85170FED2C80D87200351291 /* LaunchViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewCell.swift; sourceTree = "<group>"; };
 		85170FEE2C80D87200351291 /* LaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
-		85170FF12C80DC5600351291 /* LauchMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauchMock.swift; sourceTree = "<group>"; };
 		85170FF32C8309ED00351291 /* RocketSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsViewController.swift; sourceTree = "<group>"; };
 		85170FF52C8309FE00351291 /* RocketSettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsModel.swift; sourceTree = "<group>"; };
 		85170FF72C830A1600351291 /* RocketSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketSettingsView.swift; sourceTree = "<group>"; };
@@ -226,9 +222,7 @@
 		EC4EDD592C67A16F0064134D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				85170FF12C80DC5600351291 /* LauchMock.swift */,
 				85170FF52C8309FE00351291 /* RocketSettingsModel.swift */,
-				85170FE92C80D7E500351291 /* LaunchModel.swift */,
 				C98E44702C77406D0027A4C9 /* RocketCollectionModel.swift */,
 				C9625B7E2C79227A00848AC0 /* MockData.swift */,
 			);
@@ -335,7 +329,6 @@
 				8560A1322C86C8890074BD48 /* LaunchesResponse.swift in Sources */,
 				85170FEC2C80D85A00351291 /* LaunchViewController.swift in Sources */,
 				EC4EDD4F2C679EB80064134D /* UIView+AddSubviews.swift in Sources */,
-				85170FEA2C80D7E500351291 /* LaunchModel.swift in Sources */,
 				851ECC542C8DF86B00EF081D /* Request.swift in Sources */,
 				851ECC582C8DF8BF00EF081D /* RequestEncoder.swift in Sources */,
 				85170FF42C8309ED00351291 /* RocketSettingsViewController.swift in Sources */,
@@ -353,7 +346,6 @@
 				857D48FE2C8C4B4200C7A31F /* RequestMethod.swift in Sources */,
 				857D48FB2C8C4AA200C7A31F /* Endpoint.swift in Sources */,
 				C9C118402C70F26000F305FE /* RocketCollectionHeaderView.swift in Sources */,
-				85170FF22C80DC5600351291 /* LauchMock.swift in Sources */,
 				EC4EDD382C679C430064134D /* SceneDelegate.swift in Sources */,
 				857D48F92C8C289200C7A31F /* API.swift in Sources */,
 				C98E44712C77406D0027A4C9 /* RocketCollectionModel.swift in Sources */,
