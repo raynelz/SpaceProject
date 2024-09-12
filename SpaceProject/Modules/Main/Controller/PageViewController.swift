@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Контроллер для отображения страниц с информацией о ракетах.
 final class PageViewController: UIPageViewController {
 
     private var mainVCs: [MainViewController] = []
@@ -24,6 +25,11 @@ final class PageViewController: UIPageViewController {
         }
     }
     
+    /// Инициализация контроллера с заданным стилем переходов и навигационной ориентацией.
+    /// - Parameters:
+    ///   - style: Стиль переходов между страницами (например, прокрутка).
+    ///   - navigationOrientation: Ориентация переходов (горизонтальная или вертикальная).
+    ///   - options: Опции конфигурации для контроллера.
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation)
     }
@@ -37,13 +43,14 @@ final class PageViewController: UIPageViewController {
 //MARK: - Private Methods
 
 private extension PageViewController {
+    //MARK: Получение данных с сервера
     func fetchData() async {
         let rocketSersvice = RocketSettingsService()
         let json: [String: Any] = [:]
         do {
             let decodedData = try await rocketSersvice.getRocketSettings(json: json)
             let cellData = self.turnToRocketCollectionModel(decodedData)
-
+            for image in decodedData { print(image.flickrImages)}
             DispatchQueue.main.async {
                 self.mainVCs = self.makeVCs(dataForVC: cellData, decodedResponse: decodedData)
 
@@ -54,6 +61,7 @@ private extension PageViewController {
         }
     }
     
+    //MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
     func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
         var cellDataArray: [[RocketCollectionModel.CellData]] = []
         for decodedElement in decodedData {
@@ -82,6 +90,7 @@ private extension PageViewController {
         return cellDataArray
     }
     
+    //MARK: Создание контроллеров по типу MainViewController
     func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], decodedResponse: [RocketSettingsResponse]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
         for index in 0..<dataForVC.count {
@@ -91,6 +100,7 @@ private extension PageViewController {
         return mainVCs
     }
     
+    //MARK: Настройка внешности у PageVC
     func setupAppearance() {
         view.backgroundColor = SpaceAppColor.background
         
@@ -98,6 +108,8 @@ private extension PageViewController {
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = SpaceAppColor.pageIndicatorTintColor
     }
+    
+    //MARK: Настройка делегатов
     func setupDelegates() {
         self.dataSource = self
         self.delegate = self
