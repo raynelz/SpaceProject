@@ -17,9 +17,6 @@ final class PageViewController: UIPageViewController {
         super.viewDidLoad()
         setupAppearance()
         setupDelegates()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         Task {
             await fetchData()
         }
