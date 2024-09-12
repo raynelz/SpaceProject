@@ -9,16 +9,13 @@ import UIKit
 
 final class PageViewController: UIPageViewController {
 
-    
     private var mainVCs: [MainViewController] = []
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPageControlAppearance()
-        self.dataSource = self
-        self.delegate = self
-        
+        setupAppearance()
+        setupDelegates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +26,6 @@ final class PageViewController: UIPageViewController {
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation)
-        view.backgroundColor = SpaceAppColor.background
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +45,7 @@ private extension PageViewController {
             let cellData = self.turnToRocketCollectionModel(decodedData)
 
             DispatchQueue.main.async {
-                self.mainVCs = self.makeVCs(dataForVC: cellData)
+                self.mainVCs = self.makeVCs(dataForVC: cellData, decodedResponse: decodedData)
 
                 self.setViewControllers([self.mainVCs[0]], direction: .forward, animated: true)
             }
@@ -86,21 +82,29 @@ private extension PageViewController {
         return cellDataArray
     }
     
-    func makeVCs(dataForVC: [[RocketCollectionModel.CellData]]) -> [MainViewController] {
+    func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], decodedResponse: [RocketSettingsResponse]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
-        for cellData in dataForVC {
-            let mainVC = MainViewController(data: cellData)
+        for index in 0..<dataForVC.count {
+            let mainVC = MainViewController(data: dataForVC[index], rocketName: decodedResponse[index].name)
             mainVCs.append(mainVC)
         }
         return mainVCs
     }
     
-    func setupPageControlAppearance() {
+    func setupAppearance() {
+        view.backgroundColor = SpaceAppColor.background
+        
         let pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = SpaceAppColor.pageIndicatorTintColor
     }
+    func setupDelegates() {
+        self.dataSource = self
+        self.delegate = self
+    }
 }
+
+//MARK: - UIPageViewControllerDataSource
 
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -122,6 +126,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 }
 
+//MARK: - UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         mainVCs.count

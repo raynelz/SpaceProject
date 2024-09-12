@@ -19,12 +19,14 @@ final class MainViewController: GenericViewController<MainView> {
     >
     
     private let data: [RocketCollectionModel.CellData]
+    private let rocketName: String
     
     private var rocketDataSource: DataSource?
     
     // Custom initializer to accept data
-    init(data: [RocketCollectionModel.CellData]) {
+    init(data: [RocketCollectionModel.CellData], rocketName: String) {
         self.data = data
+        self.rocketName = rocketName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -40,7 +42,7 @@ final class MainViewController: GenericViewController<MainView> {
         setupRocketInfoCollectionView()
         setupRocketInfoCollectionDataSource()
         setupBehavior()
-        addFooterHeader()
+        addFooterHeader(rocketNameFromResponse: rocketName)
         
         setupData(data)
 	}
@@ -60,7 +62,6 @@ extension MainViewController {
     // MARK: Setup data
     
     func setupData(_ data: [RocketCollectionModel.CellData]) {
-        print("Зашла")
         var snapshot = DataSnapshot()
         snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
         data.forEach {
@@ -122,11 +123,13 @@ private extension MainViewController {
     
     // MARK: - Add footer and header
     
-    func addFooterHeader() {
+    func addFooterHeader(rocketNameFromResponse: String) {
         let headerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionHeaderView>(
             elementKind: RocketCollectionHeaderView.identifier
         ) { supplementaryView, _, _ in
             supplementaryView.delegate = self
+            supplementaryView.rocketNameLabel.text = rocketNameFromResponse
+            
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionFooterView>(

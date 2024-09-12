@@ -25,7 +25,7 @@ final class LaunchViewController: GenericViewController<LaunchView> {
 private extension LaunchViewController {
     // MARK: - Private Methods
     func setupNavigationBar() {
-        title = "Falcon Heavy"
+        title = "Rockets"
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.barTintColor = SpaceAppColor.background
         navigationController?.navigationBar.titleTextAttributes = [
