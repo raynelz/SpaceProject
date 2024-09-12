@@ -18,9 +18,19 @@ final class MainViewController: GenericViewController<MainView> {
         RocketCollectionModel.CellData
     >
     
-    var rockets: [[RocketCollectionModel.CellData]] = []
+    private let data: [RocketCollectionModel.CellData]
     
     private var rocketDataSource: DataSource?
+    
+    // Custom initializer to accept data
+    init(data: [RocketCollectionModel.CellData]) {
+        self.data = data
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 	// MARK: - Life Cycle
 
@@ -32,15 +42,8 @@ final class MainViewController: GenericViewController<MainView> {
         setupBehavior()
         addFooterHeader()
         
+        setupData(data)
 	}
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        Task {
-            await fetchData()
-        }
-    }
 }
 
 extension MainViewController: UICollectionViewDelegate {
@@ -48,6 +51,26 @@ extension MainViewController: UICollectionViewDelegate {
     
     private func setupRocketInfoCollectionView() {
         rootView.rocketInfoCollectionView.delegate = self
+    }
+}
+
+//MARK: - Public Methods
+
+extension MainViewController {
+    // MARK: Setup data
+    
+    func setupData(_ data: [RocketCollectionModel.CellData]) {
+        print("Зашла")
+        var snapshot = DataSnapshot()
+        snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
+        data.forEach {
+            guard let section = RocketCollectionModel.SectionType(rawValue: $0.sectionNumber) else {
+                fatalError("Error! Incorrect section index!")
+            }
+            
+            snapshot.appendItems([$0], toSection: section)
+        }
+        rocketDataSource?.apply(snapshot)
     }
 }
 
@@ -95,48 +118,6 @@ private extension MainViewController {
             
             return cell
         }
-    }
-    
-    func fetchData() async {
-        let rocketSersvice = RocketSettingsService()
-        let json: [String: Any] = [:]
-        do {
-            let decodedData = try await rocketSersvice.getRocketSettings(json: json)
-            DispatchQueue.main.async {
-                self.rockets = self.turnToRocketCollectionModel(decodedData)
-                self.setupData(self.rockets[0])
-            }
-        } catch {
-            print("Функция упала: \(error.localizedDescription)")
-        }
-    }
-    
-    func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
-        var cellDataArray: [[RocketCollectionModel.CellData]] = []
-        for decodedElement in decodedData {
-            var cellData: [RocketCollectionModel.CellData] = [
-                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.height.meters), secondaryText: TypeOfMeasurement.Height.description, unitsOfMeasurement: TypeOfMeasurement.Height.meters),
-                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.diameter.meters), secondaryText: TypeOfMeasurement.Diameter.description, unitsOfMeasurement: TypeOfMeasurement.Diameter.meters),
-                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.mass.kg), secondaryText: TypeOfMeasurement.Weight.description, unitsOfMeasurement: TypeOfMeasurement.Weight.kilograms),
-                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Первый запуск", secondaryText: decodedElement.firstFlight, unitsOfMeasurement: nil),
-                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Страна", secondaryText: decodedElement.country, unitsOfMeasurement: nil),
-                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Стоимость", secondaryText: String(decodedElement.costPerLaunch), unitsOfMeasurement: "$"),
-                RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Количество двигателей",  secondaryText: String(decodedElement.firstStage.engines), unitsOfMeasurement: ""),
-                RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Количество топлива", secondaryText: String(decodedElement.firstStage.fuelAmountTons), unitsOfMeasurement: "ton"),
-                RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Количество двигателей",  secondaryText: String(decodedElement.secondStage.engines), unitsOfMeasurement: ""),
-                RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Количество топлива", secondaryText: String(decodedElement.secondStage.fuelAmountTons), unitsOfMeasurement: "ton")
-            ]
-            if let stageOneBurnTime = decodedElement.firstStage.burnTimeSec {
-                let elem = RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Время сгорания топлива", secondaryText: String(stageOneBurnTime), unitsOfMeasurement: "сек")
-                cellData.append(elem)
-            }
-            if let stageTwoBurnTime = decodedElement.secondStage.burnTimeSec {
-                let elem = RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Время сгорания топлива", secondaryText: String(stageTwoBurnTime), unitsOfMeasurement: "сек")
-                cellData.append(elem)
-            }
-            cellDataArray.append(cellData)
-        }
-        return cellDataArray
     }
     
     // MARK: - Add footer and header
@@ -194,22 +175,6 @@ private extension MainViewController {
                 )
             }
         }
-    }
-
-    
-    // MARK: Setup data
-    
-    func setupData(_ data: [RocketCollectionModel.CellData]) {
-        var snapshot = DataSnapshot()
-        snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
-        data.forEach {
-            guard let section = RocketCollectionModel.SectionType(rawValue: $0.sectionNumber) else {
-                fatalError("Error! Incorrect section index!")
-            }
-            
-            snapshot.appendItems([$0], toSection: section)
-        }
-        rocketDataSource?.apply(snapshot)
     }
 }
 

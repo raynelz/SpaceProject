@@ -33,5 +33,8 @@ enum SpaceAppColor {
     
     /// Вторичный цвет текста в ячейках.
     static let cellTextSeconary = UIColor(named: "CellTextColorSecondary")
+    
+    /// Цвет для указателя индикатора страницы
+    static let pageIndicatorTintColor = UIColor(named: "PageIndicatorTintColor")
 }
 

@@ -12,7 +12,6 @@ import SnapKit
 final class MainView: UIView {
 	// MARK: - UI Components
     let backgroundImageView = UIImageView()
-    let bottomPageControl = UIPageControl()
     let rocketInfoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
     // MARK: - Initialization
@@ -49,6 +48,7 @@ private extension MainView {
         backgroundImageView.backgroundColor = SpaceAppColor.backgroundSecondary
         backgroundImageView.contentMode = .scaleAspectFill
 
+
         rocketInfoCollectionView.backgroundColor = SpaceAppColor.background
         rocketInfoCollectionView.layer.cornerRadius = 30
         rocketInfoCollectionView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -61,10 +61,9 @@ private extension MainView {
             $0.horizontalEdges.top.equalToSuperview()
             $0.height.equalTo(250)
         }
-        
         rocketInfoCollectionView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(70)
+            $0.bottom.equalToSuperview()
             $0.top.equalTo(backgroundImageView.snp.bottom).offset(-30)
         }
 	}
