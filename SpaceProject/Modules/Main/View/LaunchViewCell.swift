@@ -88,14 +88,12 @@ private extension LaunchViewCell {
             make.width.height.equalTo(40)
         }
     }
-    //MARK: - Converting Date UTC
+    // MARK: - Converting Date UTC
     func convertData(dateUtc: Double) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
-        
         let date = Date(timeIntervalSince1970: dateUtc)
-        
         dateFormatter.locale = Locale(identifier: "ru_US")
         return dateFormatter.string(from: date)
     }

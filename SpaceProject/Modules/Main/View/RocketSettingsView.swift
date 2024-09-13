@@ -7,13 +7,13 @@ final class RocketSettingsView: UIView {
     
     // Элементы горизонтальных стэков сверху вниз
     private lazy var label1 = createLabels(name: TypeOfMeasurement.Height.description)
-    private lazy var segment1 = createSegmentedControl(for: .Height)
+    private lazy var segment1 = createSegmentedControl(for: .height)
     
     private lazy var label2 = createLabels(name: TypeOfMeasurement.Diameter.description)
-    private lazy var segment2 = createSegmentedControl(for: .Diameter)
+    private lazy var segment2 = createSegmentedControl(for: .diameter)
     
     private lazy var label3 = createLabels(name: TypeOfMeasurement.Weight.description)
-    private lazy var segment3 = createSegmentedControl(for: .Weight)
+    private lazy var segment3 = createSegmentedControl(for: .weight)
     
     // Горизонтальные стэки
     private lazy var stack1: UIStackView = makeHorizontalStack(elements: [label1, segment1])
@@ -100,11 +100,11 @@ private extension RocketSettingsView {
     func createSegmentedControl(for measurementType: MeasurementType) -> UISegmentedControl {
         let items: [String]
         switch measurementType {
-        case .Height:
+        case .height:
             items = [TypeOfMeasurement.Height.meters, TypeOfMeasurement.Height.feet]
-        case .Diameter:
+        case .diameter:
             items = [TypeOfMeasurement.Diameter.meters, TypeOfMeasurement.Diameter.feet]
-        case .Weight:
+        case .weight:
             items = [TypeOfMeasurement.Weight.kilograms, TypeOfMeasurement.Weight.pounds]
         }
         
@@ -121,7 +121,7 @@ private extension RocketSettingsView {
 // MARK: - MeasurementType Enum
 /// Перечисление типов измерений для сегментированных контролов
 private enum MeasurementType {
-    case Height
-    case Diameter
-    case Weight
+    case height
+    case diameter
+    case weight
 }

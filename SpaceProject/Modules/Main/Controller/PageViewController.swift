@@ -58,7 +58,12 @@ private extension PageViewController {
             var cellData: [RocketCollectionModel.CellData] = []
             // Helper to add CellData
             func addCellData(section: Int, mainText: String, secondaryText: String, units: String?) {
-                let cell = RocketCollectionModel.CellData(sectionNumber: section, mainText: mainText, secondaryText: secondaryText, unitsOfMeasurement: units)
+                let cell = RocketCollectionModel.CellData(
+                    sectionNumber: section,
+                    mainText: mainText,
+                    secondaryText: secondaryText,
+                    unitsOfMeasurement: units
+                )
                 cellData.append(cell)
             }
             // Section 0 (Physical attributes)
