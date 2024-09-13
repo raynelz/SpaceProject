@@ -59,7 +59,7 @@ extension MainViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: - Public Methods
+// MARK: - Public Methods
 
 extension MainViewController {
     // MARK: Setup data
@@ -199,7 +199,7 @@ private extension MainViewController {
         }
     }
     
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }

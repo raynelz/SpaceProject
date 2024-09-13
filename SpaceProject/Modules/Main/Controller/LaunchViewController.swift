@@ -12,7 +12,6 @@ final class LaunchViewController: GenericViewController<LaunchView> {
         setupNavigationBar()
         setupBehavior()
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -106,4 +105,3 @@ extension LaunchViewController: UITableViewDelegate {
         return footerView
     }
 }
-

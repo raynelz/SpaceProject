@@ -12,7 +12,7 @@ final class PageViewController: UIPageViewController {
 
     private var mainVCs: [MainViewController] = []
     
-    //MARK: - Life Cycle
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
@@ -34,10 +34,10 @@ final class PageViewController: UIPageViewController {
 }
 
 
-//MARK: - Private Methods
+// MARK: - Private Methods
 
 private extension PageViewController {
-    //MARK: Получение данных с сервера
+    // MARK: Получение данных с сервера
     func fetchData() async {
         let rocketSersvice = RocketSettingsService()
         let json: [String: Any] = [:]
@@ -84,7 +84,7 @@ private extension PageViewController {
         return cellDataArray
     }
     
-    //MARK: Создание контроллеров по типу MainViewController
+    // MARK: Создание контроллеров по типу MainViewController
     func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], headerData: [RocketCollectionModel.HeaderData]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
         for index in 0..<dataForVC.count {
@@ -94,7 +94,7 @@ private extension PageViewController {
         return mainVCs
     }
     
-    //MARK: Настройка внешности у PageVC
+    // MARK: Настройка внешности у PageVC
     func setupAppearance() {
         view.backgroundColor = SpaceAppColor.background
         
@@ -103,13 +103,13 @@ private extension PageViewController {
         pageControl.currentPageIndicatorTintColor = SpaceAppColor.pageIndicatorTintColor
     }
     
-    //MARK: Настройка делегатов
+    // MARK: Настройка делегатов
     func setupDelegates() {
         self.dataSource = self
         self.delegate = self
     }
     
-    //MARK: Приведение к типу RocketCollectionModel.HeaderData
+    // MARK: Приведение к типу RocketCollectionModel.HeaderData
     func headerData(decodedResponse: [RocketSettingsResponse]) -> [RocketCollectionModel.HeaderData] {
         var headerDataArray: [RocketCollectionModel.HeaderData] = []
         for element in decodedResponse {
@@ -120,7 +120,7 @@ private extension PageViewController {
     }
 }
 
-//MARK: - UIPageViewControllerDataSource
+// MARK: - UIPageViewControllerDataSource
 
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -142,7 +142,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 }
 
-//MARK: - UIPageViewControllerDelegate
+// MARK: - UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         mainVCs.count
