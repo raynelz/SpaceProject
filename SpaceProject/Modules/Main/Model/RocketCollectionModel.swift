@@ -27,7 +27,6 @@ enum RocketCollectionModel {
         /// Название ракеты
         let rocketName: String
     }
-    
     /// Перечисление, представляющее типы секций коллекции
     enum SectionType: Int, CaseIterable {
         /// Секция с техническими характеристиками

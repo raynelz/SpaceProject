@@ -11,7 +11,6 @@ import UIKit
 final class PageViewController: UIPageViewController {
 
     private var mainVCs: [MainViewController] = []
-    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +21,11 @@ final class PageViewController: UIPageViewController {
         }
     }
     /// Инициализация контроллера с заданным стилем переходов и навигационной ориентацией.
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    override init(
+        transitionStyle style: UIPageViewController.TransitionStyle,
+        navigationOrientation: UIPageViewController.NavigationOrientation,
+        options: [UIPageViewController.OptionsKey : Any]? = nil
+    ) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation)
     }
     @available(*, unavailable)
@@ -30,7 +33,6 @@ final class PageViewController: UIPageViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 // MARK: - Private Methods
 
@@ -52,7 +54,7 @@ private extension PageViewController {
             print("Функция упала: \(error.localizedDescription)")
         }
     }
-    //MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
+    // MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
     func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
         return decodedData.map { decodedElement in
             var cellData: [RocketCollectionModel.CellData] = []
