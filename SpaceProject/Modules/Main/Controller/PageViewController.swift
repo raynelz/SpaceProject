@@ -21,12 +21,10 @@ final class PageViewController: UIPageViewController {
             await fetchData()
         }
     }
-    
     /// Инициализация контроллера с заданным стилем переходов и навигационной ориентацией.
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation)
     }
-    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -54,7 +52,6 @@ private extension PageViewController {
             print("Функция упала: \(error.localizedDescription)")
         }
     }
-    
     //MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
     func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
         var cellDataArray: [[RocketCollectionModel.CellData]] = []
@@ -83,7 +80,6 @@ private extension PageViewController {
         }
         return cellDataArray
     }
-    
     // MARK: Создание контроллеров по типу MainViewController
     func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], headerData: [RocketCollectionModel.HeaderData]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
@@ -93,22 +89,18 @@ private extension PageViewController {
         }
         return mainVCs
     }
-    
     // MARK: Настройка внешности у PageVC
     func setupAppearance() {
         view.backgroundColor = SpaceAppColor.background
-        
         let pageControl = UIPageControl.appearance()
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = SpaceAppColor.pageIndicatorTintColor
     }
-    
     // MARK: Настройка делегатов
     func setupDelegates() {
         self.dataSource = self
         self.delegate = self
     }
-    
     // MARK: Приведение к типу RocketCollectionModel.HeaderData
     func headerData(decodedResponse: [RocketSettingsResponse]) -> [RocketCollectionModel.HeaderData] {
         var headerDataArray: [RocketCollectionModel.HeaderData] = []
@@ -130,8 +122,8 @@ extension PageViewController: UIPageViewControllerDataSource {
         }
         return nil
     }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let viewController = viewController as? MainViewController else { return nil }
         if let index = mainVCs.firstIndex(of: viewController) {
             if index < mainVCs.count - 1 {
