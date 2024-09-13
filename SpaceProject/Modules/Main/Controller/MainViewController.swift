@@ -21,7 +21,6 @@ final class MainViewController: GenericViewController<MainView> {
     private let data: [RocketCollectionModel.CellData]
     private let rocketName: String
     private let imageURL: String
-    
     private var rocketDataSource: DataSource?
     
     // Кастомный инициализатор для правильного получения данных с сервера
@@ -31,11 +30,10 @@ final class MainViewController: GenericViewController<MainView> {
         self.imageURL = headerData.image
         super.init(nibName: nil, bundle: nil)
     }
-    
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 	// MARK: - Life Cycle
 
 	override func viewDidLoad() {
@@ -63,7 +61,6 @@ extension MainViewController: UICollectionViewDelegate {
 
 extension MainViewController {
     // MARK: Setup data
-    
     func setupData(_ data: [RocketCollectionModel.CellData]) {
         var snapshot = DataSnapshot()
         snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
@@ -71,7 +68,6 @@ extension MainViewController {
             guard let section = RocketCollectionModel.SectionType(rawValue: $0.sectionNumber) else {
                 fatalError("Error! Incorrect section index!")
             }
-            
             snapshot.appendItems([$0], toSection: section)
         }
         rocketDataSource?.apply(snapshot)
@@ -132,7 +128,6 @@ private extension MainViewController {
         ) { supplementaryView, _, _ in
             supplementaryView.delegate = self
             supplementaryView.rocketNameLabel.text = rocketNameFromResponse
-            
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionFooterView>(
@@ -183,7 +178,7 @@ private extension MainViewController {
         }
     }
     
-    //MARK: - Fetch Data For Image View
+    // MARK: - Fetch Data For Image View
     
     func downloadImage(from url: String) {
         let url = URL(string: url)!
@@ -193,12 +188,11 @@ private extension MainViewController {
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             // always update the UI from the main thread
-            DispatchQueue.main.async() { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.rootView.backgroundImageView.image = UIImage(data: data)
             }
         }
     }
-    
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
