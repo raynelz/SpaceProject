@@ -54,58 +54,64 @@ private extension PageViewController {
     }
     //MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
     func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
-        var cellDataArray: [[RocketCollectionModel.CellData]] = []
-        for decodedElement in decodedData {
-            var cellData: [RocketCollectionModel.CellData] = [
-                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.height.meters),
-                                               secondaryText: TypeOfMeasurement.Height.description,
-                                               unitsOfMeasurement: TypeOfMeasurement.Height.meters),
-                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.diameter.meters),
-                                               secondaryText: TypeOfMeasurement.Diameter.description,
-                                               unitsOfMeasurement: TypeOfMeasurement.Diameter.meters),
-                RocketCollectionModel.CellData(sectionNumber: 0, mainText: String(decodedElement.mass.kg),
-                                               secondaryText: TypeOfMeasurement.Weight.description,
-                                               unitsOfMeasurement: TypeOfMeasurement.Weight.kilograms),
-                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Первый запуск",
-                                               secondaryText: decodedElement.firstFlight,
-                                               unitsOfMeasurement: nil),
-                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Страна",
-                                               secondaryText: decodedElement.country,
-                                               unitsOfMeasurement: nil),
-                RocketCollectionModel.CellData(sectionNumber: 1, mainText: "Стоимость",
-                                               secondaryText: String(decodedElement.costPerLaunch),
-                                               unitsOfMeasurement: "$"),
-                RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Количество двигателей",
-                                               secondaryText: String(decodedElement.firstStage.engines),
-                                               unitsOfMeasurement: ""),
-                RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Количество топлива",
-                                               secondaryText: String(decodedElement.firstStage.fuelAmountTons),
-                                               unitsOfMeasurement: "ton"),
-                RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Количество двигателей",
-                                               secondaryText: String(decodedElement.secondStage.engines),
-                                               unitsOfMeasurement: ""),
-                RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Количество топлива",
-                                               secondaryText: String(decodedElement.secondStage.fuelAmountTons),
-                                               unitsOfMeasurement: "ton")
-            ]
-            if let stageOneBurnTime = decodedElement.firstStage.burnTimeSec {
-                let elem = RocketCollectionModel.CellData(sectionNumber: 2, mainText: "Время сгорания топлива",
-                                                          secondaryText: String(stageOneBurnTime),
-                                                          unitsOfMeasurement: "сек")
-                cellData.append(elem)
+        return decodedData.map { decodedElement in
+            var cellData: [RocketCollectionModel.CellData] = []
+            // Helper to add CellData
+            func addCellData(section: Int, mainText: String, secondaryText: String, units: String?) {
+                let cell = RocketCollectionModel.CellData(sectionNumber: section, mainText: mainText, secondaryText: secondaryText, unitsOfMeasurement: units)
+                cellData.append(cell)
             }
-            if let stageTwoBurnTime = decodedElement.secondStage.burnTimeSec {
-                let elem = RocketCollectionModel.CellData(sectionNumber: 3, mainText: "Время сгорания топлива",
-                                                          secondaryText: String(stageTwoBurnTime),
-                                                          unitsOfMeasurement: "сек")
-                cellData.append(elem)
+            // Section 0 (Physical attributes)
+            addCellData(section: 0, mainText: String(decodedElement.height.meters),
+                        secondaryText: TypeOfMeasurement.Height.description,
+                        units: TypeOfMeasurement.Height.meters)
+            addCellData(section: 0, mainText: String(decodedElement.diameter.meters),
+                        secondaryText: TypeOfMeasurement.Diameter.description,
+                        units: TypeOfMeasurement.Diameter.meters)
+            addCellData(section: 0, mainText: String(decodedElement.mass.kg),
+                        secondaryText: TypeOfMeasurement.Weight.description,
+                        units: TypeOfMeasurement.Weight.kilograms)
+            // Section 1 (Launch information)
+            addCellData(section: 1, mainText: "Первый запуск",
+                        secondaryText: decodedElement.firstFlight,
+                        units: nil)
+            addCellData(section: 1, mainText: "Страна",
+                        secondaryText: decodedElement.country,
+                        units: nil)
+            addCellData(section: 1, mainText: "Стоимость",
+                        secondaryText: String(decodedElement.costPerLaunch),
+                        units: "$")
+            // Section 2 (First stage)
+            addCellData(section: 2, mainText: "Количество двигателей",
+                        secondaryText: String(decodedElement.firstStage.engines),
+                        units: "")
+            addCellData(section: 2, mainText: "Количество топлива",
+                        secondaryText: String(decodedElement.firstStage.fuelAmountTons),
+                        units: "ton")
+            if let burnTime = decodedElement.firstStage.burnTimeSec {
+                addCellData(section: 2, mainText: "Время сгорания топлива",
+                            secondaryText: String(burnTime),
+                            units: "сек")
             }
-            cellDataArray.append(cellData)
+            // Section 3 (Second stage)
+            addCellData(section: 3, mainText: "Количество двигателей",
+                        secondaryText: String(decodedElement.secondStage.engines),
+                        units: "")
+            addCellData(section: 3, mainText: "Количество топлива",
+                        secondaryText: String(decodedElement.secondStage.fuelAmountTons),
+                        units: "ton")
+            if let burnTime = decodedElement.secondStage.burnTimeSec {
+                addCellData(section: 3, mainText: "Время сгорания топлива",
+                            secondaryText: String(burnTime),
+                            units: "сек")
+            }
+            return cellData
         }
-        return cellDataArray
     }
+
     // MARK: Создание контроллеров по типу MainViewController
-    func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], headerData: [RocketCollectionModel.HeaderData]) -> [MainViewController] {
+    func makeVCs(dataForVC: [[RocketCollectionModel.CellData]],
+                 headerData: [RocketCollectionModel.HeaderData]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
         for index in 0..<dataForVC.count {
             let mainVC = MainViewController(data: dataForVC[index], headerData: headerData[index])
@@ -139,7 +145,8 @@ private extension PageViewController {
 // MARK: - UIPageViewControllerDataSource
 
 extension PageViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let viewController = viewController as? MainViewController else { return nil }
         if let index = mainVCs.firstIndex(of: viewController) {
             if index > 0 { return mainVCs[index - 1]}
