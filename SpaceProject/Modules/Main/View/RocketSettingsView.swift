@@ -107,7 +107,6 @@ private extension RocketSettingsView {
         case .weight:
             items = [TypeOfMeasurement.Weight.kilograms, TypeOfMeasurement.Weight.pounds]
         }
-        
         let segmentControl = UISegmentedControl(items: items)
         segmentControl.selectedSegmentIndex = 0
         segmentControl.backgroundColor = SpaceAppColor.cellBackground
