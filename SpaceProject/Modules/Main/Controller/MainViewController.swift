@@ -20,13 +20,15 @@ final class MainViewController: GenericViewController<MainView> {
     
     private let data: [RocketCollectionModel.CellData]
     private let rocketName: String
+    private let imageURL: String
     
     private var rocketDataSource: DataSource?
     
-    // Custom initializer to accept data
-    init(data: [RocketCollectionModel.CellData], rocketName: String) {
+    // Кастомный инициализатор для правильного получения данных с сервера
+    init(data: [RocketCollectionModel.CellData], headerData: RocketCollectionModel.HeaderData) {
         self.data = data
-        self.rocketName = rocketName
+        self.rocketName = headerData.rocketName
+        self.imageURL = headerData.image
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,6 +45,7 @@ final class MainViewController: GenericViewController<MainView> {
         setupRocketInfoCollectionDataSource()
         setupBehavior()
         addFooterHeader(rocketNameFromResponse: rocketName)
+        downloadImage(from: imageURL)
         
         setupData(data)
 	}
@@ -178,6 +181,26 @@ private extension MainViewController {
                 )
             }
         }
+    }
+    
+    //MARK: - Fetch Data For Image View
+    
+    func downloadImage(from url: String) {
+        let url = URL(string: url)!
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            // always update the UI from the main thread
+            DispatchQueue.main.async() { [weak self] in
+                self?.rootView.backgroundImageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }
 

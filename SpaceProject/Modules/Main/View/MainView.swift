@@ -11,7 +11,9 @@ import SnapKit
 /// View главного экрана
 final class MainView: UIView {
 	// MARK: - UI Components
+    /// Фоновое изображение.
     let backgroundImageView = UIImageView()
+    /// Коллекция с информацией о ракетах.
     let rocketInfoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
     // MARK: - Initialization

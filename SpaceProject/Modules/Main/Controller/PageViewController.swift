@@ -23,14 +23,11 @@ final class PageViewController: UIPageViewController {
     }
     
     /// Инициализация контроллера с заданным стилем переходов и навигационной ориентацией.
-    /// - Parameters:
-    ///   - style: Стиль переходов между страницами (например, прокрутка).
-    ///   - navigationOrientation: Ориентация переходов (горизонтальная или вертикальная).
-    ///   - options: Опции конфигурации для контроллера.
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,9 +44,9 @@ private extension PageViewController {
         do {
             let decodedData = try await rocketSersvice.getRocketSettings(json: json)
             let cellData = self.turnToRocketCollectionModel(decodedData)
-            for image in decodedData { print(image.flickrImages)}
+            let headerDataForMakeVCs = headerData(decodedResponse: decodedData)
             DispatchQueue.main.async {
-                self.mainVCs = self.makeVCs(dataForVC: cellData, decodedResponse: decodedData)
+                self.mainVCs = self.makeVCs(dataForVC: cellData, headerData: headerDataForMakeVCs)
 
                 self.setViewControllers([self.mainVCs[0]], direction: .forward, animated: true)
             }
@@ -88,10 +85,10 @@ private extension PageViewController {
     }
     
     //MARK: Создание контроллеров по типу MainViewController
-    func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], decodedResponse: [RocketSettingsResponse]) -> [MainViewController] {
+    func makeVCs(dataForVC: [[RocketCollectionModel.CellData]], headerData: [RocketCollectionModel.HeaderData]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
         for index in 0..<dataForVC.count {
-            let mainVC = MainViewController(data: dataForVC[index], rocketName: decodedResponse[index].name)
+            let mainVC = MainViewController(data: dataForVC[index], headerData: headerData[index])
             mainVCs.append(mainVC)
         }
         return mainVCs
@@ -110,6 +107,16 @@ private extension PageViewController {
     func setupDelegates() {
         self.dataSource = self
         self.delegate = self
+    }
+    
+    //MARK: Приведение к типу RocketCollectionModel.HeaderData
+    func headerData(decodedResponse: [RocketSettingsResponse]) -> [RocketCollectionModel.HeaderData] {
+        var headerDataArray: [RocketCollectionModel.HeaderData] = []
+        for element in decodedResponse {
+            let headerData = RocketCollectionModel.HeaderData(image: element.flickrImages[0], rocketName: element.name)
+            headerDataArray.append(headerData)
+        }
+        return headerDataArray
     }
 }
 

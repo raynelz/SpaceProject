@@ -46,6 +46,9 @@ struct RocketSettingsResponse: Decodable {
     let firstStage: FirstStage
     /// Данные о второй ступени ракеты.
     let secondStage: SecondStage
+    /// Изображения ракеты
+    let flickrImages: [String]
+
 }
 
 /// Модель данных о высоте ракеты.
