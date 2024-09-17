@@ -11,7 +11,6 @@ final class LaunchViewController: GenericViewController<LaunchView> {
         super.viewDidLoad()
         setupNavigationBar()
         setupBehavior()
-        
         Task {
             await fetchData()
         }

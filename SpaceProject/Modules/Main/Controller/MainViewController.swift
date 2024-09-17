@@ -24,7 +24,6 @@ final class MainViewController: GenericViewController<MainView> {
     >
     
     weak var delegate: MainViewControllerDelegate?
-    
     private let data: [RocketCollectionModel.CellData]
     private let rocketName: String
     private let imageURL: String
@@ -205,7 +204,6 @@ private extension MainViewController {
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
-    
     // MARK: Setup RocketSettings VC Delegate
     func setupRocketVCDelegate() {
         rocketSettingsVC.delegate = self
