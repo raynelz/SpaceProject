@@ -231,7 +231,6 @@ extension MainViewController: RocketCollectionFooterViewDelegate {
 /// Реализует протокол `RocketCollectionHeaderViewDelegate`, который отвечает за реакцию на нажатие кнопки
 /// в хедере коллекции. Делегат вызывает метод `didTapSettingsButton`, который открывает окно настроек.
 extension MainViewController: RocketCollectionHeaderViewDelegate {
-
     /// Метод, вызываемый при нажатии кнопки настроек в хедере коллекции.
     ///
     /// Открывает окно настроек в формате `sheet presentation` 
@@ -245,7 +244,16 @@ extension MainViewController: RocketCollectionHeaderViewDelegate {
     }
 }
 
+/// Делегат `RocketSettingsViewControllerDelegate`
+///
+/// Передает 3 параметра из своего класса
+/// Эти три параметра - состояния UISegmentControls
+/// `true` - дефолтные настройки
+/// `false` - Обновленные
 extension MainViewController: RocketSettingsViewControllerDelegate {
+    /// Метод делегата, вызывается при изменении любой из 3-х настроек
+    ///
+    /// Передает управление делегату выше в `updateSettings`
     func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
         delegate?.updateSettings(diameterStatus: diameterStatus, heightStatus: heightStatus, weightStatus: weightStatus)
     }

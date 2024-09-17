@@ -202,7 +202,16 @@ extension PageViewController: UIPageViewControllerDelegate {
     }
 }
 
+// MARK: - Делегат MainViewControllerDelegate
+/// Делегат класса `MainViewControllerDelegate`
+/// и вложенный `RocketSettingsViewControllerDelegate`
+///
+/// Информирует о том, что в классе `RocketSettingsViewController`
+/// произошли изменения параметров, и передает их
 extension PageViewController: MainViewControllerDelegate {
+    /// Метод делегата `MainViewControllerDelegate`
+    ///
+    /// В нем происходит обновление настроек отдельно взятого MainVC
     func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
         self.cellData = turnToRocketCollectionModel(decodedData, heightDefault: heightStatus, diameterStatus: diameterStatus, weightStatus: weightStatus)
         guard let currentVC = viewControllers?.first as? MainViewController else { return }
