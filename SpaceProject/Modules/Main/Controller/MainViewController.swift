@@ -7,8 +7,20 @@
 
 import UIKit
 
+/// Протокол MainViewControllerDelegate используется для делегирования действий
+/// от MainViewController к другому объекту.
+///
+/// Этот протокол определяет два метода, которые позволяют объекту-делегату
+/// реагировать на события из MainViewController.
 protocol MainViewControllerDelegate: AnyObject {
+    /// Метод вызывается для обновления настроек, связанных с ракетой.
+    ///
+    /// - Parameters:
+    ///   - diameterStatus: Статус диаметра ракеты (включен или выключен).
+    ///   - heightStatus: Статус высоты ракеты (включен или выключен).
+    ///   - weightStatus: Статус веса ракеты (включен или выключен).
     func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool)
+    /// Метод вызывается при нажатии на кнопку запуска ракеты.
     func didTapLaunchButtonDelegate()
 }
 
@@ -23,6 +35,7 @@ final class MainViewController: GenericViewController<MainView> {
         RocketCollectionModel.CellData
     >
     
+    /// Делегат класса `MainViewController`
     weak var delegate: MainViewControllerDelegate?
     private let data: [RocketCollectionModel.CellData]
     private let rocketName: String
