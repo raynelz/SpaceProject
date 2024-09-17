@@ -62,7 +62,6 @@ private extension PageViewController {
     func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse], heightDefault: Bool = true, diameterStatus: Bool = true, weightStatus: Bool = true) -> [[RocketCollectionModel.CellData]] {
         return decodedData.map { decodedElement in
             var cellData: [RocketCollectionModel.CellData] = []
-            
             // Helper to add CellData
             func addCellData(section: Int, mainText: String, secondaryText: String, units: String?) {
                 let cell = RocketCollectionModel.CellData(
@@ -73,20 +72,16 @@ private extension PageViewController {
                 )
                 cellData.append(cell)
             }
-
             // Section 0 (Physical attributes)
             addCellData(section: 0, mainText: heightDefault ? String(decodedElement.height.meters) : String(decodedElement.height.feet),
                         secondaryText: TypeOfMeasurement.Height.description,
                         units: heightDefault ? TypeOfMeasurement.Height.meters : TypeOfMeasurement.Height.feet)
-            
             addCellData(section: 0, mainText: diameterStatus ? String(decodedElement.diameter.meters) : String(decodedElement.diameter.feet),
                         secondaryText: TypeOfMeasurement.Diameter.description,
                         units: diameterStatus ? TypeOfMeasurement.Diameter.meters : TypeOfMeasurement.Diameter.feet)
-            
             addCellData(section: 0, mainText: weightStatus ? String(decodedElement.mass.kg) : String(decodedElement.mass.lb),
                         secondaryText: TypeOfMeasurement.Weight.description,
                         units: weightStatus ? TypeOfMeasurement.Weight.kilograms : TypeOfMeasurement.Weight.pounds)
-
             // Section 1 (Launch information)
             addCellData(section: 1, mainText: "Первый запуск",
                         secondaryText: decodedElement.firstFlight,
@@ -99,37 +94,30 @@ private extension PageViewController {
             addCellData(section: 1, mainText: "Стоимость",
                         secondaryText: String(decodedElement.costPerLaunch),
                         units: "$")
-
             // Section 2 (First stage)
             addCellData(section: 2, mainText: "Количество двигателей",
                         secondaryText: String(decodedElement.firstStage.engines),
                         units: "")
-            
             addCellData(section: 2, mainText: "Количество топлива",
                         secondaryText: String(decodedElement.firstStage.fuelAmountTons),
                         units: "ton")
-            
             if let burnTime = decodedElement.firstStage.burnTimeSec {
                 addCellData(section: 2, mainText: "Время сгорания топлива",
                             secondaryText: String(burnTime),
                             units: "сек")
             }
-
             // Section 3 (Second stage)
             addCellData(section: 3, mainText: "Количество двигателей",
                         secondaryText: String(decodedElement.secondStage.engines),
                         units: "")
-            
             addCellData(section: 3, mainText: "Количество топлива",
                         secondaryText: String(decodedElement.secondStage.fuelAmountTons),
                         units: "ton")
-            
             if let burnTime = decodedElement.secondStage.burnTimeSec {
                 addCellData(section: 3, mainText: "Время сгорания топлива",
                             secondaryText: String(burnTime),
                             units: "сек")
             }
-
             return cellData
         }
     }
