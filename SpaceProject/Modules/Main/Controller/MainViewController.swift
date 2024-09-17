@@ -9,7 +9,6 @@ import UIKit
 
 protocol MainViewControllerDelegate: AnyObject {
     func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool)
-    func didButtonTappedDelegate()
 }
 
 /// Контроллер главного экрана
@@ -230,11 +229,18 @@ extension MainViewController: RocketCollectionFooterViewDelegate {
 /// Расширение для обработки событий нажатия кнопки в RocketCollectionHeaderView
 ///
 /// Реализует протокол `RocketCollectionHeaderViewDelegate`, который отвечает за реакцию на нажатие кнопки
-/// в хедере коллекции. Делегат вызывает метод `didTapSettingsButton`
+/// в хедере коллекции. Делегат вызывает метод `didTapSettingsButton`, который открывает окно настроек.
 extension MainViewController: RocketCollectionHeaderViewDelegate {
-    /// Метод перенаправляет основную логику на `PageViewController`
+    /// Метод, вызываемый при нажатии кнопки настроек в хедере коллекции.
+    ///
+    /// Открывает окно настроек в формате `sheet presentation` 
+    /// с возможностью выбора между средним и большим представлением.
     func didTapSettingsButton() {
-        delegate?.didButtonTappedDelegate()
+        let navigationController = UINavigationController(rootViewController: rocketSettingsVC)
+        if let sheet = navigationController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+        present(navigationController, animated: true)
     }
 }
 

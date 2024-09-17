@@ -13,6 +13,7 @@ final class PageViewController: UIPageViewController {
     private var mainVCs: [MainViewController] = []
     private var cellData: [[RocketCollectionModel.CellData]] = []
     private var decodedData: [RocketSettingsResponse] = []
+    private var loadingOverlay: UIView?
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,10 +204,12 @@ extension PageViewController: UIPageViewControllerDelegate {
 
 // MARK: - Делегат MainViewControllerDelegate
 /// Делегат класса `MainViewControllerDelegate`
+/// и вложенный `RocketSettingsViewControllerDelegate`
 ///
-/// Имеет внутри себя два метода которые делегируют логику на `PageViewController`
+/// Информирует о том, что в классе `RocketSettingsViewController`
+/// произошли изменения параметров, и передает их
 extension PageViewController: MainViewControllerDelegate {
-    /// Метод делегата `updateSettings`
+    /// Метод делегата `MainViewControllerDelegate`
     ///
     /// В нем происходит обновление настроек отдельно взятого MainVC
     func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
@@ -216,16 +219,5 @@ extension PageViewController: MainViewControllerDelegate {
         let updatedData = cellData[currentIndex]
         currentVC.setupData(updatedData)   
     }
-    /// Метод делегата `didButtonTappedDelegate`
-    ///
-    /// Его задача состоит в том чтобы делегировать нажатие на кнопку
-    /// настроек
-    func didButtonTappedDelegate() {
-        let rocketSettingsVC = RocketSettingsViewController()
-        let navigationController = UINavigationController(rootViewController: rocketSettingsVC)
-        if let sheet = navigationController.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-        }
-        present(navigationController, animated: true)
-    }
 }
+
