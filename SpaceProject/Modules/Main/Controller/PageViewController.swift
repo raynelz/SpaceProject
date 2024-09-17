@@ -122,6 +122,7 @@ private extension PageViewController {
         var mainVCs: [MainViewController] = []
         for index in 0..<dataForVC.count {
             let mainVC = MainViewController(data: dataForVC[index], headerData: headerData[index])
+            mainVC.delegate = self
             mainVCs.append(mainVC)
         }
         return mainVCs
@@ -137,6 +138,7 @@ private extension PageViewController {
     func setupDelegates() {
         self.dataSource = self
         self.delegate = self
+        
     }
     // MARK: Приведение к типу RocketCollectionModel.HeaderData
     func headerData(decodedResponse: [RocketSettingsResponse]) -> [RocketCollectionModel.HeaderData] {
@@ -179,5 +181,11 @@ extension PageViewController: UIPageViewControllerDelegate {
     }
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         0
+    }
+}
+
+extension PageViewController: MainViewControllerDelegate {
+    func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
+        print("Hello from PageViewController")
     }
 }

@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol MainViewControllerDelegate: AnyObject {
+    func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool)
+}
 
 /// Контроллер главного экрана
 final class MainViewController: GenericViewController<MainView> {
@@ -18,6 +21,8 @@ final class MainViewController: GenericViewController<MainView> {
         RocketCollectionModel.SectionType,
         RocketCollectionModel.CellData
     >
+    
+    weak var delegate: MainViewControllerDelegate?
     
     private let data: [RocketCollectionModel.CellData]
     private let rocketName: String
@@ -243,5 +248,6 @@ extension MainViewController: RocketCollectionHeaderViewDelegate {
 extension MainViewController: RocketSettingsViewControllerDelegate {
     func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
         print("Settings changed")
+        delegate?.updateSettings(diameterStatus: diameterStatus, heightStatus: heightStatus, weightStatus: weightStatus)
     }
 }
