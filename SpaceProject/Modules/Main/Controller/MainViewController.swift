@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 /// Контроллер главного экрана
 final class MainViewController: GenericViewController<MainView> {
     private typealias DataSource = UICollectionViewDiffableDataSource<
@@ -22,6 +23,7 @@ final class MainViewController: GenericViewController<MainView> {
     private let rocketName: String
     private let imageURL: String
     private var rocketDataSource: DataSource?
+    private let rocketSettingsVC = RocketSettingsViewController()
     
     // Кастомный инициализатор для правильного получения данных с сервера
     init(data: [RocketCollectionModel.CellData], headerData: RocketCollectionModel.HeaderData) {
@@ -44,6 +46,7 @@ final class MainViewController: GenericViewController<MainView> {
         setupBehavior()
         addFooterHeader(rocketNameFromResponse: rocketName)
         downloadImage(from: imageURL)
+        setupRocketVCDelegate()
         
         setupData(data)
 	}
@@ -196,6 +199,11 @@ private extension MainViewController {
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
+    
+    // MARK: Setup RocketSettings VC Delegate
+    func setupRocketVCDelegate() {
+        rocketSettingsVC.delegate = self
+    }
 }
 
 /// Расширение для обработки событий нажатия кнопки в RocketCollectionFooterView
@@ -224,11 +232,16 @@ extension MainViewController: RocketCollectionHeaderViewDelegate {
     /// Открывает окно настроек в формате `sheet presentation` 
     /// с возможностью выбора между средним и большим представлением.
     func didTapSettingsButton() {
-        let sheetViewController = RocketSettingsViewController()
-        let navigationController = UINavigationController(rootViewController: sheetViewController)
+        let navigationController = UINavigationController(rootViewController: rocketSettingsVC)
         if let sheet = navigationController.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
         }
         present(navigationController, animated: true)
+    }
+}
+
+extension MainViewController: RocketSettingsViewControllerDelegate {
+    func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
+        print("Settings changed")
     }
 }

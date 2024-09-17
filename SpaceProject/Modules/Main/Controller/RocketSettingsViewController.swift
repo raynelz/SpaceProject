@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol RocketSettingsViewControllerDelegate: AnyObject {
+    func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool)
+}
+
 /// Контроллер для экрана настроек отображения параметров ракеты.
 /// Управляет пользовательским интерфейсом для изменения и настройки параметров ракеты.
 final class RocketSettingsViewController: GenericViewController<RocketSettingsView> {
@@ -20,6 +24,8 @@ final class RocketSettingsViewController: GenericViewController<RocketSettingsVi
     /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между килограммами и фунтами).
     var weightStatusDefault = false
 
+    weak var delegate: RocketSettingsViewControllerDelegate?
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -73,12 +79,15 @@ private extension RocketSettingsViewController {
             case 0:
                 diameterStatusDefault.toggle()
                 print("DiameterChange: \(diameterStatusDefault)")
+                delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
             case 1:
                 heightStatusDefault.toggle()
                 print("HeightChange: \(heightStatusDefault)")
+                delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
             case 2:
                 weightStatusDefault.toggle()
                 print("WeightChange: \(weightStatusDefault)")
+                delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
             default:
                 break
             }
