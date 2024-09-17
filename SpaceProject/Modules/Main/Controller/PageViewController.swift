@@ -14,6 +14,7 @@ final class PageViewController: UIPageViewController {
     private var cellData: [[RocketCollectionModel.CellData]] = []
     private var decodedData: [RocketSettingsResponse] = []
     private var loadingOverlay: UIView?
+    private let launchVC = LaunchViewController()
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -204,14 +205,14 @@ extension PageViewController: UIPageViewControllerDelegate {
 
 // MARK: - Делегат MainViewControllerDelegate
 /// Делегат класса `MainViewControllerDelegate`
-/// и вложенный `RocketSettingsViewControllerDelegate`
-///
-/// Информирует о том, что в классе `RocketSettingsViewController`
-/// произошли изменения параметров, и передает их
 extension PageViewController: MainViewControllerDelegate {
-    /// Метод делегата `MainViewControllerDelegate`
-    ///
-    /// В нем происходит обновление настроек отдельно взятого MainVC
+    /// Метод информирует о нажатии кнопки `Посмотреть запуски`
+    /// внутри `RocketCollectionHeaderView`
+    func didTapLaunchButtonDelegate() {
+        navigationController?.pushViewController(launchVC, animated: true)
+    }
+    /// Метод информирует о том, что в классе `RocketSettingsViewController`
+    /// произошли изменения параметров, и передает их
     func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
         self.cellData = turnToRocketCollectionModel(decodedData, heightDefault: heightStatus, diameterStatus: diameterStatus, weightStatus: weightStatus)
         guard let currentVC = viewControllers?.first as? MainViewController else { return }
