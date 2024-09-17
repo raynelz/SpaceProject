@@ -25,6 +25,7 @@ final class RocketSettingsViewController: GenericViewController<RocketSettingsVi
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupSegmentsBehavior()
     }
 }
 
@@ -71,13 +72,13 @@ private extension RocketSettingsViewController {
             switch sender.tag {
             case 0:
                 diameterStatusDefault.toggle()
-                print("Diameter Status: \(diameterStatusDefault)")
+                print("DiameterChange: \(diameterStatusDefault)")
             case 1:
                 heightStatusDefault.toggle()
                 print("HeightChange: \(heightStatusDefault)")
             case 2:
                 weightStatusDefault.toggle()
-                print("WeightChange: \(heightStatusDefault)")
+                print("WeightChange: \(weightStatusDefault)")
             default:
                 break
             }
