@@ -247,7 +247,6 @@ extension MainViewController: RocketCollectionHeaderViewDelegate {
 
 extension MainViewController: RocketSettingsViewControllerDelegate {
     func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
-        print("Settings changed")
         delegate?.updateSettings(diameterStatus: diameterStatus, heightStatus: heightStatus, weightStatus: weightStatus)
     }
 }

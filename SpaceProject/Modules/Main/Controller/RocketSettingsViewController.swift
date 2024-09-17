@@ -15,14 +15,14 @@ protocol RocketSettingsViewControllerDelegate: AnyObject {
 /// Управляет пользовательским интерфейсом для изменения и настройки параметров ракеты.
 final class RocketSettingsViewController: GenericViewController<RocketSettingsView> {
     /// Переменная, отвечающая за текущий статус отображения диаметра.
-    /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между метрами и футами).
-    var diameterStatusDefault = false
+    /// По умолчанию равна `true`. Используется для переключения единиц измерения (например, между метрами и футами).
+    var diameterStatusDefault = true
     /// Переменная, отвечающая за текущий статус отображения высоты.
-    /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между метрами и футами).
-    var heightStatusDefault = false
+    /// По умолчанию равна `true`. Используется для переключения единиц измерения (например, между метрами и футами).
+    var heightStatusDefault = true
     /// Переменная, отвечающая за текущий статус отображения веса.
-    /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между килограммами и фунтами).
-    var weightStatusDefault = false
+    /// По умолчанию равна `true`. Используется для переключения единиц измерения (например, между килограммами и фунтами).
+    var weightStatusDefault = true
 
     weak var delegate: RocketSettingsViewControllerDelegate?
     
@@ -78,15 +78,12 @@ private extension RocketSettingsViewController {
             switch sender.tag {
             case 0:
                 diameterStatusDefault.toggle()
-                print("DiameterChange: \(diameterStatusDefault)")
                 delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
             case 1:
                 heightStatusDefault.toggle()
-                print("HeightChange: \(heightStatusDefault)")
                 delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
             case 2:
                 weightStatusDefault.toggle()
-                print("WeightChange: \(weightStatusDefault)")
                 delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
             default:
                 break

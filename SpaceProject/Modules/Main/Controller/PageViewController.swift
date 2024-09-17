@@ -11,6 +11,9 @@ import UIKit
 final class PageViewController: UIPageViewController {
 
     private var mainVCs: [MainViewController] = []
+    private var cellData: [[RocketCollectionModel.CellData]] = []
+    private var decodedData: [RocketSettingsResponse] = []
+    private var loadingOverlay: UIView?
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +45,11 @@ private extension PageViewController {
         let rocketSersvice = RocketSettingsService()
         let json: [String: Any] = [:]
         do {
-            let decodedData = try await rocketSersvice.getRocketSettings(json: json)
-            let cellData = self.turnToRocketCollectionModel(decodedData)
+            self.decodedData = try await rocketSersvice.getRocketSettings(json: json)
+            self.cellData = self.turnToRocketCollectionModel(decodedData)
             let headerDataForMakeVCs = headerData(decodedResponse: decodedData)
             DispatchQueue.main.async {
-                self.mainVCs = self.makeVCs(dataForVC: cellData, headerData: headerDataForMakeVCs)
+                self.mainVCs = self.makeVCs(dataForVC: self.cellData, headerData: headerDataForMakeVCs)
 
                 self.setViewControllers([self.mainVCs[0]], direction: .forward, animated: true)
             }
@@ -55,9 +58,10 @@ private extension PageViewController {
         }
     }
     // MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
-    func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
+    func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse], heightDefault: Bool = true, diameterStatus: Bool = true, weightStatus: Bool = true) -> [[RocketCollectionModel.CellData]] {
         return decodedData.map { decodedElement in
             var cellData: [RocketCollectionModel.CellData] = []
+            
             // Helper to add CellData
             func addCellData(section: Int, mainText: String, secondaryText: String, units: String?) {
                 let cell = RocketCollectionModel.CellData(
@@ -68,53 +72,67 @@ private extension PageViewController {
                 )
                 cellData.append(cell)
             }
+
             // Section 0 (Physical attributes)
-            addCellData(section: 0, mainText: String(decodedElement.height.meters),
+            addCellData(section: 0, mainText: heightDefault ? String(decodedElement.height.meters) : String(decodedElement.height.feet),
                         secondaryText: TypeOfMeasurement.Height.description,
-                        units: TypeOfMeasurement.Height.meters)
-            addCellData(section: 0, mainText: String(decodedElement.diameter.meters),
+                        units: heightDefault ? TypeOfMeasurement.Height.meters : TypeOfMeasurement.Height.feet)
+            
+            addCellData(section: 0, mainText: diameterStatus ? String(decodedElement.diameter.meters) : String(decodedElement.diameter.feet),
                         secondaryText: TypeOfMeasurement.Diameter.description,
-                        units: TypeOfMeasurement.Diameter.meters)
-            addCellData(section: 0, mainText: String(decodedElement.mass.kg),
+                        units: diameterStatus ? TypeOfMeasurement.Diameter.meters : TypeOfMeasurement.Diameter.feet)
+            
+            addCellData(section: 0, mainText: weightStatus ? String(decodedElement.mass.kg) : String(decodedElement.mass.lb),
                         secondaryText: TypeOfMeasurement.Weight.description,
-                        units: TypeOfMeasurement.Weight.kilograms)
+                        units: weightStatus ? TypeOfMeasurement.Weight.kilograms : TypeOfMeasurement.Weight.pounds)
+
             // Section 1 (Launch information)
             addCellData(section: 1, mainText: "Первый запуск",
                         secondaryText: decodedElement.firstFlight,
                         units: nil)
+            
             addCellData(section: 1, mainText: "Страна",
                         secondaryText: decodedElement.country,
                         units: nil)
+            
             addCellData(section: 1, mainText: "Стоимость",
                         secondaryText: String(decodedElement.costPerLaunch),
                         units: "$")
+
             // Section 2 (First stage)
             addCellData(section: 2, mainText: "Количество двигателей",
                         secondaryText: String(decodedElement.firstStage.engines),
                         units: "")
+            
             addCellData(section: 2, mainText: "Количество топлива",
                         secondaryText: String(decodedElement.firstStage.fuelAmountTons),
                         units: "ton")
+            
             if let burnTime = decodedElement.firstStage.burnTimeSec {
                 addCellData(section: 2, mainText: "Время сгорания топлива",
                             secondaryText: String(burnTime),
                             units: "сек")
             }
+
             // Section 3 (Second stage)
             addCellData(section: 3, mainText: "Количество двигателей",
                         secondaryText: String(decodedElement.secondStage.engines),
                         units: "")
+            
             addCellData(section: 3, mainText: "Количество топлива",
                         secondaryText: String(decodedElement.secondStage.fuelAmountTons),
                         units: "ton")
+            
             if let burnTime = decodedElement.secondStage.burnTimeSec {
                 addCellData(section: 3, mainText: "Время сгорания топлива",
                             secondaryText: String(burnTime),
                             units: "сек")
             }
+
             return cellData
         }
     }
+
 
     // MARK: Создание контроллеров по типу MainViewController
     func makeVCs(dataForVC: [[RocketCollectionModel.CellData]],
@@ -186,6 +204,11 @@ extension PageViewController: UIPageViewControllerDelegate {
 
 extension PageViewController: MainViewControllerDelegate {
     func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
-        print("Hello from PageViewController")
+        self.cellData = turnToRocketCollectionModel(decodedData, heightDefault: heightStatus, diameterStatus: diameterStatus, weightStatus: weightStatus)
+        guard let currentVC = viewControllers?.first as? MainViewController else { return }
+        let currentIndex = mainVCs.firstIndex(of: currentVC) ?? 0
+        let updatedData = cellData[currentIndex]
+        currentVC.setupData(updatedData)   
     }
 }
+
