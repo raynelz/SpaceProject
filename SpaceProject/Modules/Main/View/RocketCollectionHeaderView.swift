@@ -27,7 +27,8 @@ final class RocketCollectionHeaderView: UICollectionReusableView {
     weak var delegate: RocketCollectionHeaderViewDelegate?
     
     // MARK: - UI Components
-    private let rocketNameLabel = UILabel()
+    /// Доступ к названию ракеты
+    let rocketNameLabel = UILabel()
     private let settingsButton = UIButton()
     
     // MARK: - Initialization

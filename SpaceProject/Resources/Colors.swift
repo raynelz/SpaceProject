@@ -12,26 +12,21 @@ import UIKit
 enum SpaceAppColor {
     /// Цвет для вторичных фонов.
     static let backgroundSecondary = UIColor(named: "BackgroundSecondaryColor")
-    
     /// Цвет фона ячеек.
     static let cellBackground = UIColor(named: "CellBackgroundColor")
-    
     /// Цвет для вторичных фонов ячеек.
     static let cellBackgroundSecondary = UIColor(named: "CellBackgroundSecondary")
-    
     /// Основной фоновый цвет приложения.
     static let background = UIColor.systemBackground
-    
     /// Основной цвет текста.
     static let text = UIColor.label
-    
     /// Цвет текста для вторичных элементов.
     static let textSecondary = UIColor(named: "TextSecondaryColor")
-    
     /// Цвет текста в ячейках.
     static let cellText = UIColor(named: "CellTextColor")
-    
     /// Вторичный цвет текста в ячейках.
     static let cellTextSeconary = UIColor(named: "CellTextColorSecondary")
+    /// Цвет для указателя индикатора страницы
+    static let pageIndicatorTintColor = UIColor(named: "PageIndicatorTintColor")
 }
 

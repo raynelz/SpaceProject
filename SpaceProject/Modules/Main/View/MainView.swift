@@ -11,8 +11,9 @@ import SnapKit
 /// View главного экрана
 final class MainView: UIView {
 	// MARK: - UI Components
+    /// Фоновое изображение.
     let backgroundImageView = UIImageView()
-    let bottomPageControl = UIPageControl()
+    /// Коллекция с информацией о ракетах.
     let rocketInfoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
     // MARK: - Initialization
@@ -39,7 +40,6 @@ private extension MainView {
 	func embedViews() {
         addSubviews(
             backgroundImageView,
-            bottomPageControl,
             rocketInfoCollectionView
         )
 	}
@@ -50,10 +50,6 @@ private extension MainView {
         backgroundImageView.backgroundColor = SpaceAppColor.backgroundSecondary
         backgroundImageView.contentMode = .scaleAspectFill
 
-        bottomPageControl.backgroundColor = SpaceAppColor.backgroundSecondary
-        bottomPageControl.pageIndicatorTintColor = SpaceAppColor.cellText
-        bottomPageControl.currentPageIndicatorTintColor = SpaceAppColor.text
-        bottomPageControl.numberOfPages = 1
 
         rocketInfoCollectionView.backgroundColor = SpaceAppColor.background
         rocketInfoCollectionView.layer.cornerRadius = 30
@@ -67,13 +63,9 @@ private extension MainView {
             $0.horizontalEdges.top.equalToSuperview()
             $0.height.equalTo(250)
         }
-        bottomPageControl.snp.makeConstraints {
-            $0.horizontalEdges.bottom.equalToSuperview()
-            $0.height.equalTo(70)
-        }
         rocketInfoCollectionView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(bottomPageControl.snp.top)
+            $0.bottom.equalToSuperview()
             $0.top.equalTo(backgroundImageView.snp.bottom).offset(-30)
         }
 	}

@@ -41,10 +41,10 @@ final class LaunchViewCell: UITableViewCell {
     }
     
     // MARK: - Configuration
-    func configure(model: Launch) {
+    func configure(model: LaunchesResponse) {
         nameLabel.text = model.name
-        dateLabel.text = model.date
-        iconImageView.image = model.launchIs ? UIImage(named: "rocket-done") :
+        dateLabel.text = convertData(dateUtc: model.dateUnix)
+        iconImageView.image = model.success ?? false ? UIImage(named: "rocket-done") :
         UIImage(named: "rocket-fail")
     }
 }
@@ -76,6 +76,7 @@ private extension LaunchViewCell {
         nameLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.top.equalToSuperview().inset(25)
+            make.trailing.equalTo(iconImageView.snp.leading).offset(-20)
         }
         dateLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel.snp.leading)
@@ -86,5 +87,14 @@ private extension LaunchViewCell {
             make.centerY.equalToSuperview()
             make.width.height.equalTo(40)
         }
+    }
+    // MARK: - Converting Date UTC
+    func convertData(dateUtc: Double) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        let date = Date(timeIntervalSince1970: dateUtc)
+        dateFormatter.locale = Locale(identifier: "ru_US")
+        return dateFormatter.string(from: date)
     }
 }

@@ -10,17 +10,17 @@ protocol RocketSettingsServiceProtocol {
     /// Получает настройки ракеты
     /// - Parameter json: данные в формате JSON для запроса
     /// - Returns: ответ от сервера с настройками ракеты
-    func getRocketSettings(json: JSON) async throws -> RocketSettingsResponse
+    func getRocketSettings(json: JSON) async throws -> [RocketSettingsResponse]
 }
 
 /// Реализация сервиса для получения настроек ракеты
 final class RocketSettingsService: Request, RocketSettingsServiceProtocol {
     
     /// Получает настройки ракеты
-    func getRocketSettings(json: JSON) async throws -> RocketSettingsResponse {
+    func getRocketSettings(json: JSON) async throws -> [RocketSettingsResponse] {
         return try await sendRequest(
             endpoint: RocketEndpoint.rockets(json: json),
-            responseModel: RocketSettingsResponse.self
+            responseModel: [RocketSettingsResponse].self
         )
     }
 }
@@ -31,7 +31,7 @@ struct RocketSettingsResponse: Decodable {
     /// Название ракеты.
     let name: String
     /// Стоимость запуска (в долларах).
-    let costPerLaunch: Int
+    let costPerLaunch: Double
     /// Дата первого запуска ракеты (в формате строки).
     let firstFlight: String
     /// Страна, из которой происходит ракета.
@@ -46,6 +46,9 @@ struct RocketSettingsResponse: Decodable {
     let firstStage: FirstStage
     /// Данные о второй ступени ракеты.
     let secondStage: SecondStage
+    /// Изображения ракеты
+    let flickrImages: [String]
+
 }
 
 /// Модель данных о высоте ракеты.
@@ -79,7 +82,7 @@ struct FirstStage: Decodable {
     /// Объем топлива на первой ступени (в тоннах).
     let fuelAmountTons: Double
     /// Время горения первой ступени (в секундах).
-    let burnTimeSec: Int
+    let burnTimeSec: Double?
 }
 
 /// Модель данных о второй ступени ракеты.
@@ -89,5 +92,5 @@ struct SecondStage: Decodable {
     /// Объем топлива на второй ступени (в тоннах).
     let fuelAmountTons: Double
     /// Время горения второй ступени (в секундах).
-    let burnTimeSec: Int
+    let burnTimeSec: Double?
 }

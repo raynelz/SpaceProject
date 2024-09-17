@@ -18,8 +18,22 @@ final class MainViewController: GenericViewController<MainView> {
         RocketCollectionModel.CellData
     >
     
+    private let data: [RocketCollectionModel.CellData]
+    private let rocketName: String
+    private let imageURL: String
     private var rocketDataSource: DataSource?
     
+    // Кастомный инициализатор для правильного получения данных с сервера
+    init(data: [RocketCollectionModel.CellData], headerData: RocketCollectionModel.HeaderData) {
+        self.data = data
+        self.rocketName = headerData.rocketName
+        self.imageURL = headerData.image
+        super.init(nibName: nil, bundle: nil)
+    }
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 	// MARK: - Life Cycle
 
 	override func viewDidLoad() {
@@ -28,9 +42,10 @@ final class MainViewController: GenericViewController<MainView> {
         setupRocketInfoCollectionView()
         setupRocketInfoCollectionDataSource()
         setupBehavior()
-        addFooterHeader()
+        addFooterHeader(rocketNameFromResponse: rocketName)
+        downloadImage(from: imageURL)
         
-        setupData(MockData.collectionMockData)
+        setupData(data)
 	}
 }
 
@@ -42,12 +57,29 @@ extension MainViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Public Methods
+
+extension MainViewController {
+    // MARK: Setup data
+    func setupData(_ data: [RocketCollectionModel.CellData]) {
+        var snapshot = DataSnapshot()
+        snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
+        data.forEach {
+            guard let section = RocketCollectionModel.SectionType(rawValue: $0.sectionNumber) else {
+                fatalError("Error! Incorrect section index!")
+            }
+            snapshot.appendItems([$0], toSection: section)
+        }
+        rocketDataSource?.apply(snapshot)
+    }
+}
+
 // MARK: - Private Methods
 
 private extension MainViewController {
     // MARK: - Setup Behavior
 
-    private func setupBehavior() {
+    func setupBehavior() {
         rootView.rocketInfoCollectionView.register(
             RocketCollectionVerticalCell.self,
             forCellWithReuseIdentifier: RocketCollectionVerticalCell.identifier
@@ -60,7 +92,7 @@ private extension MainViewController {
     
     // MARK: - Setup Collection DataSource
     
-    private func setupRocketInfoCollectionDataSource() {
+    func setupRocketInfoCollectionDataSource() {
         rocketDataSource = DataSource(
             collectionView: rootView.rocketInfoCollectionView
         ) { _, indexPath, itemData in
@@ -90,11 +122,12 @@ private extension MainViewController {
     
     // MARK: - Add footer and header
     
-    private func addFooterHeader() {
+    func addFooterHeader(rocketNameFromResponse: String) {
         let headerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionHeaderView>(
             elementKind: RocketCollectionHeaderView.identifier
         ) { supplementaryView, _, _ in
             supplementaryView.delegate = self
+            supplementaryView.rocketNameLabel.text = rocketNameFromResponse
         }
         
         let footerRegistration = UICollectionView.SupplementaryRegistration<RocketCollectionFooterView>(
@@ -144,21 +177,24 @@ private extension MainViewController {
             }
         }
     }
-
     
-    // MARK: Setup data
+    // MARK: - Fetch Data For Image View
     
-    func setupData(_ data: [RocketCollectionModel.CellData]) {
-        var snapshot = DataSnapshot()
-        snapshot.appendSections(RocketCollectionModel.SectionType.allCases)
-        data.forEach {
-            guard let section = RocketCollectionModel.SectionType(rawValue: $0.sectionNumber) else {
-                fatalError("Error! Incorrect section index!")
+    func downloadImage(from url: String) {
+        let url = URL(string: url)!
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            // always update the UI from the main thread
+            DispatchQueue.main.async { [weak self] in
+                self?.rootView.backgroundImageView.image = UIImage(data: data)
             }
-            
-            snapshot.appendItems([$0], toSection: section)
         }
-        rocketDataSource?.apply(snapshot)
+    }
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }
 
