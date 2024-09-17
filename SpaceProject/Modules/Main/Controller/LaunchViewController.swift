@@ -11,10 +11,6 @@ final class LaunchViewController: GenericViewController<LaunchView> {
         super.viewDidLoad()
         setupNavigationBar()
         setupBehavior()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         Task {
             await fetchData()
         }

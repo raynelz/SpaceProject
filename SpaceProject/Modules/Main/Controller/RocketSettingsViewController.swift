@@ -7,16 +7,31 @@
 
 import UIKit
 
+protocol RocketSettingsViewControllerDelegate: AnyObject {
+    func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool)
+}
+
 /// Контроллер для экрана настроек отображения параметров ракеты.
 /// Управляет пользовательским интерфейсом для изменения и настройки параметров ракеты.
 final class RocketSettingsViewController: GenericViewController<RocketSettingsView> {
+    /// Переменная, отвечающая за текущий статус отображения диаметра.
+    /// По умолчанию равна `true`. Используется для переключения единиц измерения (например, между метрами и футами).
+    var diameterStatusDefault = true
+    /// Переменная, отвечающая за текущий статус отображения высоты.
+    /// По умолчанию равна `true`. Используется для переключения единиц измерения (например, между метрами и футами).
+    var heightStatusDefault = true
+    /// Переменная, отвечающая за текущий статус отображения веса.
+    /// По умолчанию равна `true`. Используется для переключения единиц измерения (например, между килограммами и фунтами).
+    var weightStatusDefault = true
 
+    weak var delegate: RocketSettingsViewControllerDelegate?
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        setupSegmentsBehavior()
     }
 }
 
@@ -50,6 +65,28 @@ private extension RocketSettingsViewController {
         navigationController?.dismiss(animated: true)
     }
     func setupSegmentsBehavior() {
-//        let segments = rootView.getSegmentedControls()
-    }
+            let segments = rootView.getSegmentedControls()
+            segments.diameter.tag = 0
+            segments.height.tag = 1
+            segments.weight.tag = 2
+            
+            for segment in [segments.diameter, segments.height, segments.weight] {
+                segment.addTarget(self, action: #selector(segmentChange(_:)), for: .valueChanged)
+            }
+        }
+        @objc func segmentChange(_ sender: UISegmentedControl) {
+            switch sender.tag {
+            case 0:
+                diameterStatusDefault.toggle()
+                delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
+            case 1:
+                heightStatusDefault.toggle()
+                delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
+            case 2:
+                weightStatusDefault.toggle()
+                delegate?.didSettingsChange(diameterStatus: diameterStatusDefault, heightStatus: heightStatusDefault, weightStatus: weightStatusDefault)
+            default:
+                break
+            }
+        }
 }

@@ -11,6 +11,10 @@ import UIKit
 final class PageViewController: UIPageViewController {
 
     private var mainVCs: [MainViewController] = []
+    private var cellData: [[RocketCollectionModel.CellData]] = []
+    private var decodedData: [RocketSettingsResponse] = []
+    private var loadingOverlay: UIView?
+    private let launchVC = LaunchViewController()
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +46,11 @@ private extension PageViewController {
         let rocketSersvice = RocketSettingsService()
         let json: [String: Any] = [:]
         do {
-            let decodedData = try await rocketSersvice.getRocketSettings(json: json)
-            let cellData = self.turnToRocketCollectionModel(decodedData)
+            self.decodedData = try await rocketSersvice.getRocketSettings(json: json)
+            self.cellData = self.turnToRocketCollectionModel(decodedData)
             let headerDataForMakeVCs = headerData(decodedResponse: decodedData)
             DispatchQueue.main.async {
-                self.mainVCs = self.makeVCs(dataForVC: cellData, headerData: headerDataForMakeVCs)
+                self.mainVCs = self.makeVCs(dataForVC: self.cellData, headerData: headerDataForMakeVCs)
 
                 self.setViewControllers([self.mainVCs[0]], direction: .forward, animated: true)
             }
@@ -55,7 +59,7 @@ private extension PageViewController {
         }
     }
     // MARK: Подгон данных с сервера к [[RocketCollectionModel.CellData]]
-    func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse]) -> [[RocketCollectionModel.CellData]] {
+    func turnToRocketCollectionModel(_ decodedData: [RocketSettingsResponse], heightDefault: Bool = true, diameterStatus: Bool = true, weightStatus: Bool = true) -> [[RocketCollectionModel.CellData]] {
         return decodedData.map { decodedElement in
             var cellData: [RocketCollectionModel.CellData] = []
             // Helper to add CellData
@@ -69,22 +73,24 @@ private extension PageViewController {
                 cellData.append(cell)
             }
             // Section 0 (Physical attributes)
-            addCellData(section: 0, mainText: String(decodedElement.height.meters),
+            addCellData(section: 0, mainText: heightDefault ? String(decodedElement.height.meters) : String(decodedElement.height.feet),
                         secondaryText: TypeOfMeasurement.Height.description,
-                        units: TypeOfMeasurement.Height.meters)
-            addCellData(section: 0, mainText: String(decodedElement.diameter.meters),
+                        units: heightDefault ? TypeOfMeasurement.Height.meters : TypeOfMeasurement.Height.feet)
+            addCellData(section: 0, mainText: diameterStatus ? String(decodedElement.diameter.meters) : String(decodedElement.diameter.feet),
                         secondaryText: TypeOfMeasurement.Diameter.description,
-                        units: TypeOfMeasurement.Diameter.meters)
-            addCellData(section: 0, mainText: String(decodedElement.mass.kg),
+                        units: diameterStatus ? TypeOfMeasurement.Diameter.meters : TypeOfMeasurement.Diameter.feet)
+            addCellData(section: 0, mainText: weightStatus ? String(decodedElement.mass.kg) : String(decodedElement.mass.lb),
                         secondaryText: TypeOfMeasurement.Weight.description,
-                        units: TypeOfMeasurement.Weight.kilograms)
+                        units: weightStatus ? TypeOfMeasurement.Weight.kilograms : TypeOfMeasurement.Weight.pounds)
             // Section 1 (Launch information)
             addCellData(section: 1, mainText: "Первый запуск",
                         secondaryText: decodedElement.firstFlight,
                         units: nil)
+            
             addCellData(section: 1, mainText: "Страна",
                         secondaryText: decodedElement.country,
                         units: nil)
+            
             addCellData(section: 1, mainText: "Стоимость",
                         secondaryText: String(decodedElement.costPerLaunch),
                         units: "$")
@@ -116,12 +122,14 @@ private extension PageViewController {
         }
     }
 
+
     // MARK: Создание контроллеров по типу MainViewController
     func makeVCs(dataForVC: [[RocketCollectionModel.CellData]],
                  headerData: [RocketCollectionModel.HeaderData]) -> [MainViewController] {
         var mainVCs: [MainViewController] = []
         for index in 0..<dataForVC.count {
             let mainVC = MainViewController(data: dataForVC[index], headerData: headerData[index])
+            mainVC.delegate = self
             mainVCs.append(mainVC)
         }
         return mainVCs
@@ -137,6 +145,7 @@ private extension PageViewController {
     func setupDelegates() {
         self.dataSource = self
         self.delegate = self
+        
     }
     // MARK: Приведение к типу RocketCollectionModel.HeaderData
     func headerData(decodedResponse: [RocketSettingsResponse]) -> [RocketCollectionModel.HeaderData] {
@@ -181,3 +190,23 @@ extension PageViewController: UIPageViewControllerDelegate {
         0
     }
 }
+
+// MARK: - Делегат MainViewControllerDelegate
+/// Делегат класса `MainViewControllerDelegate`
+extension PageViewController: MainViewControllerDelegate {
+    /// Метод информирует о нажатии кнопки `Посмотреть запуски`
+    /// внутри `RocketCollectionHeaderView`
+    func didTapLaunchButtonDelegate() {
+        navigationController?.pushViewController(launchVC, animated: true)
+    }
+    /// Метод информирует о том, что в классе `RocketSettingsViewController`
+    /// произошли изменения параметров, и передает их
+    func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
+        self.cellData = turnToRocketCollectionModel(decodedData, heightDefault: heightStatus, diameterStatus: diameterStatus, weightStatus: weightStatus)
+        guard let currentVC = viewControllers?.first as? MainViewController else { return }
+        let currentIndex = mainVCs.firstIndex(of: currentVC) ?? 0
+        let updatedData = cellData[currentIndex]
+        currentVC.setupData(updatedData)   
+    }
+}
+

@@ -7,18 +7,18 @@ final class RocketSettingsView: UIView {
     
     // Элементы горизонтальных стэков сверху вниз
     private lazy var label1 = createLabels(name: TypeOfMeasurement.Height.description)
-    private lazy var segment1 = createSegmentedControl(for: .height)
+    private lazy var heightSegment = createSegmentedControl(for: .height)
     
     private lazy var label2 = createLabels(name: TypeOfMeasurement.Diameter.description)
-    private lazy var segment2 = createSegmentedControl(for: .diameter)
+    private lazy var diameterSegment = createSegmentedControl(for: .diameter)
     
     private lazy var label3 = createLabels(name: TypeOfMeasurement.Weight.description)
-    private lazy var segment3 = createSegmentedControl(for: .weight)
+    private lazy var weightSegment = createSegmentedControl(for: .weight)
     
     // Горизонтальные стэки
-    private lazy var stack1: UIStackView = makeHorizontalStack(elements: [label1, segment1])
-    private lazy var stack2: UIStackView = makeHorizontalStack(elements: [label2, segment2])
-    private lazy var stack3: UIStackView = makeHorizontalStack(elements: [label3, segment3])
+    private lazy var stack1: UIStackView = makeHorizontalStack(elements: [label1, heightSegment])
+    private lazy var stack2: UIStackView = makeHorizontalStack(elements: [label2, diameterSegment])
+    private lazy var stack3: UIStackView = makeHorizontalStack(elements: [label3, weightSegment])
     
     // Вертикальный стэк
     private lazy var verticalStack: UIStackView = {
@@ -44,10 +44,14 @@ final class RocketSettingsView: UIView {
     }
     
     // MARK: - Public Methods
-    /// Возвращает массив всех сегментированных контролов на экране
-    func getSegmentedControls() -> [UISegmentedControl] {
-        return [segment1, segment2, segment3]
-    }
+    /// Возвращает структура всех сегментированных контролов на экране
+        func getSegmentedControls() -> SegmentedControlsModel {
+            return SegmentedControlsModel(
+                height: heightSegment,
+                diameter: diameterSegment,
+                weight: weightSegment
+            )
+        }
 }
 
 // MARK: - Private Methods

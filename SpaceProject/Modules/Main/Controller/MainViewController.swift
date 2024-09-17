@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol MainViewControllerDelegate: AnyObject {
+    func updateSettings(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool)
+    func didTapLaunchButtonDelegate()
+}
+
 /// Контроллер главного экрана
 final class MainViewController: GenericViewController<MainView> {
     private typealias DataSource = UICollectionViewDiffableDataSource<
@@ -18,10 +23,12 @@ final class MainViewController: GenericViewController<MainView> {
         RocketCollectionModel.CellData
     >
     
+    weak var delegate: MainViewControllerDelegate?
     private let data: [RocketCollectionModel.CellData]
     private let rocketName: String
     private let imageURL: String
     private var rocketDataSource: DataSource?
+    private let rocketSettingsVC = RocketSettingsViewController()
     
     // Кастомный инициализатор для правильного получения данных с сервера
     init(data: [RocketCollectionModel.CellData], headerData: RocketCollectionModel.HeaderData) {
@@ -44,6 +51,7 @@ final class MainViewController: GenericViewController<MainView> {
         setupBehavior()
         addFooterHeader(rocketNameFromResponse: rocketName)
         downloadImage(from: imageURL)
+        setupRocketVCDelegate()
         
         setupData(data)
 	}
@@ -196,20 +204,21 @@ private extension MainViewController {
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
+    // MARK: Setup RocketSettings VC Delegate
+    func setupRocketVCDelegate() {
+        rocketSettingsVC.delegate = self
+    }
 }
 
-/// Расширение для обработки событий нажатия кнопки в RocketCollectionFooterView
+// MARK: - Delegates
+/// Обрабатывает нажатие кнопки запуска.
 ///
-/// Реализует протокол `RocketCollectionFooterViewDelegate`, который отвечает за реакцию на нажатие кнопки
-/// в футере коллекции. Делегат вызывает метод `didTapLaunchButton`, который инициирует переход на экран с запусками.
+/// Этот метод вызывается, когда пользователь нажимает на кнопку запуска в `RocketCollectionFooterView`.
 extension MainViewController: RocketCollectionFooterViewDelegate {
-
-    /// Метод, вызываемый при нажатии кнопки в футере коллекции ракет.
-    ///
-    /// Открывает экран с информацией о запусках.
+    /// Метод передает управление в `PageViewController`
+    /// из `RocketCollectionFooterView`
     func didTapLaunchButton() {
-        let launchesVC = LaunchViewController()
-        navigationController?.pushViewController(launchesVC, animated: true)
+        delegate?.didTapLaunchButtonDelegate()
     }
 }
 
@@ -218,17 +227,30 @@ extension MainViewController: RocketCollectionFooterViewDelegate {
 /// Реализует протокол `RocketCollectionHeaderViewDelegate`, который отвечает за реакцию на нажатие кнопки
 /// в хедере коллекции. Делегат вызывает метод `didTapSettingsButton`, который открывает окно настроек.
 extension MainViewController: RocketCollectionHeaderViewDelegate {
-
     /// Метод, вызываемый при нажатии кнопки настроек в хедере коллекции.
     ///
     /// Открывает окно настроек в формате `sheet presentation` 
     /// с возможностью выбора между средним и большим представлением.
     func didTapSettingsButton() {
-        let sheetViewController = RocketSettingsViewController()
-        let navigationController = UINavigationController(rootViewController: sheetViewController)
+        let navigationController = UINavigationController(rootViewController: rocketSettingsVC)
         if let sheet = navigationController.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
         }
         present(navigationController, animated: true)
+    }
+}
+
+/// Делегат `RocketSettingsViewControllerDelegate`
+///
+/// Передает 3 параметра из своего класса
+/// Эти три параметра - состояния UISegmentControls
+/// `true` - дефолтные настройки
+/// `false` - Обновленные
+extension MainViewController: RocketSettingsViewControllerDelegate {
+    /// Метод делегата, вызывается при изменении любой из 3-х настроек
+    ///
+    /// Передает управление делегату выше в `updateSettings`
+    func didSettingsChange(diameterStatus: Bool, heightStatus: Bool, weightStatus: Bool) {
+        delegate?.updateSettings(diameterStatus: diameterStatus, heightStatus: heightStatus, weightStatus: weightStatus)
     }
 }

@@ -5,6 +5,8 @@
 //  Created by Станислав Никулин on 22.08.2024.
 //
 
+import UIKit
+
 /// Тип измерения для параметров ракеты.
 /// Перечисление типов измерений
 ///
@@ -44,4 +46,15 @@ enum TypeOfMeasurement {
         /// Единица измерения высоты: футы
         static let feet = "ft"
     }
+}
+
+/// Структура для удобного получения всех UISegment Controls
+/// из экрана RocketSettingsView
+struct SegmentedControlsModel {
+    /// Парметры высоты m/ft
+    let height: UISegmentedControl
+    /// Параметры диаметра m/ft
+    let diameter: UISegmentedControl
+    /// Параметры веса kg/lb
+    let weight: UISegmentedControl
 }
