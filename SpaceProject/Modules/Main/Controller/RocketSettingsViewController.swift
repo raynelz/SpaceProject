@@ -10,8 +10,16 @@ import UIKit
 /// Контроллер для экрана настроек отображения параметров ракеты.
 /// Управляет пользовательским интерфейсом для изменения и настройки параметров ракеты.
 final class RocketSettingsViewController: GenericViewController<RocketSettingsView> {
+    /// Переменная, отвечающая за текущий статус отображения диаметра.
+    /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между метрами и футами).
+    var diameterStatusDefault = false
+    /// Переменная, отвечающая за текущий статус отображения высоты.
+    /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между метрами и футами).
+    var heightStatusDefault = false
+    /// Переменная, отвечающая за текущий статус отображения веса.
+    /// По умолчанию равна `false`. Используется для переключения единиц измерения (например, между килограммами и фунтами).
+    var weightStatusDefault = false
 
-    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -50,6 +58,28 @@ private extension RocketSettingsViewController {
         navigationController?.dismiss(animated: true)
     }
     func setupSegmentsBehavior() {
-//        let segments = rootView.getSegmentedControls()
-    }
+            let segments = rootView.getSegmentedControls()
+            segments.diameter.tag = 0
+            segments.height.tag = 1
+            segments.weight.tag = 2
+            
+            for segment in [segments.diameter, segments.height, segments.weight] {
+                segment.addTarget(self, action: #selector(segmentChange(_:)), for: .valueChanged)
+            }
+        }
+        @objc func segmentChange(_ sender: UISegmentedControl) {
+            switch sender.tag {
+            case 0:
+                diameterStatusDefault.toggle()
+                print("Diameter Status: \(diameterStatusDefault)")
+            case 1:
+                heightStatusDefault.toggle()
+                print("HeightChange: \(heightStatusDefault)")
+            case 2:
+                weightStatusDefault.toggle()
+                print("WeightChange: \(heightStatusDefault)")
+            default:
+                break
+            }
+        }
 }
